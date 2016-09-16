@@ -59,7 +59,7 @@ db.users.loadDatabase();
 
 ////////////////////////////////////////////////////////////////
 // OAuth処理
-var oauthconfig = require('./oauth.js')
+var oauthconfig = require('./oauth.js');
 var passport = require('passport');
 app.use(passport.initialize());
 app.use(passport.session());
