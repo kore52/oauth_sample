@@ -11,12 +11,13 @@
     "debug": "~2.2.0",
     "ejs": "~2.4.1",
     "express": "^4.13.4",
-    "express-session": "1.14.1",
     "morgan": "~1.7.0",
-    "nedb": "1.8.0",
-    "oauth": "0.9.14",
-    "passport": "0.3.2",
-    "passport-github": "1.1.0",
+    "nedb": "*",
+    "oauth": "*",
+    "passport": "*",
+    "passport-github": "*",
+    "passport-twitter": "*",
+    "express-session": "*",
     "serve-favicon": "~2.3.0"
   }
 }

@@ -28,14 +28,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(session({
-  secret: 'the quick brown fox',
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    maxAge: 30*60*1000
-  }
-}));
 
 /*
 var sessionCheck = function(req, res) {
@@ -63,6 +55,14 @@ var oauthconfig = require('./oauth.js');
 var passport = require('passport');
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(session({
+  secret: 'the quick brown fox',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 30*60*1000
+  }
+}));
 
 ////////////////////////////////////////////////////////////////
 // GitHubアカウントによるOAuth処理
@@ -85,11 +85,10 @@ app.get('/auth/github',
   passport.authenticate('github'));
 
 app.get('/auth/github/callback',
-  passport.authenticate('github', { failureRedirect: '/' }),
-  function(req, res) {
-    // Successful authentication, redirect home.
-    res.redirect('/users');
-  }
+  passport.authenticate('github', {
+    successRedirect: '/users',
+    failureRedirect: '/'
+  })
 );
 
 
