@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 
 var session = require('express-session');
 
+// ページ遷移
 var routes = require('./routes/index');
 var users = require('./routes/users');
 //var register = require('./routes/register');
@@ -58,20 +59,18 @@ db.users.loadDatabase();
 
 ////////////////////////////////////////////////////////////////
 // OAuth処理
+var oauthconfig = require('./oauth.js')
 var passport = require('passport');
 app.use(passport.initialize());
 app.use(passport.session());
 
 ////////////////////////////////////////////////////////////////
 // GitHubアカウントによるOAuth処理
-var GITHUB_CLIENT_ID = "e858816e383dc1a444fb";
-var GITHUB_CLIENT_SECRET = "8725ea28858065a8fc398ea5e0743e285bca1a6c";
-
 var GitHubStrategy = require('passport-github').Strategy;
 passport.use(new GitHubStrategy({
-    clientID: GITHUB_CLIENT_ID,
-    clientSecret: GITHUB_CLIENT_SECRET,
-    callbackURL: "http://oauth-sample-001.herokuapp.com/auth/github/callback",
+    clientID: oauthconfig.github.clientID,
+    clientSecret: oauthconfig.github.clientSecret,
+    callbackURL: oauthconfig.github.callbackURL,
   },
   function(token, tokenSecret, profile, done) {
     db.users.find({name: profile.username, provider: profile.provider}, function(err, docs){
@@ -89,13 +88,14 @@ app.get('/auth/github/callback',
   passport.authenticate('github', { failureRedirect: '/' }),
   function(req, res) {
     // Successful authentication, redirect home.
-    res.redirect('/');
+    res.redirect('/users');
   }
 );
 
 
 app.use('/', routes);
 app.use('/login', login);
+app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
