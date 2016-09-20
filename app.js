@@ -27,6 +27,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+  secret: 'the quick brown fox'
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 30*60*1000
+  }
+}));
 
 
 /*
@@ -55,14 +63,6 @@ var oauthconfig = require('./oauth.js');
 var passport = require('passport');
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(session({
-  secret: 'the quick brown fox'
-//  resave: false,
-//  saveUninitialized: false,
-//  cookie: {
-//    maxAge: 30*60*1000
-//  }
-}));
 
 ////////////////////////////////////////////////////////////////
 // GitHubアカウントによるOAuth処理
@@ -83,6 +83,13 @@ passport.use(new GitHubStrategy({
     });
   }
 ));
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+  done(null, user);
+});
 
 app.get('/auth/github', function(req, res) {
   console.log('!auth');
