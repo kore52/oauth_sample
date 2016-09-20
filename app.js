@@ -56,7 +56,7 @@ var passport = require('passport');
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(session({
-  secret: 'the quick brown fox',
+  secret: 'the quick brown fox'
 //  resave: false,
 //  saveUninitialized: false,
 //  cookie: {
