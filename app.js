@@ -57,10 +57,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(session({
   secret: 'the quick brown fox',
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    maxAge: 30*60*1000
+//  resave: false,
+//  saveUninitialized: false,
+//  cookie: {
+//    maxAge: 30*60*1000
   }
 }));
 
@@ -73,8 +73,11 @@ passport.use(new GitHubStrategy({
     callbackURL: oauthconfig.github.callbackURL,
   },
   function(token, tokenSecret, profile, done) {
+    console.log('user-authentication');
     db.users.find({name: profile.username, provider: profile.provider}, function(err, docs){
+      console.log('finding user');
       if (docs === []) {
+        console.log('creating user');
         db.users.insert({name: profile.username, provider: profile.provider});
       }
     });
@@ -82,9 +85,11 @@ passport.use(new GitHubStrategy({
 ));
 
 app.get('/auth/github',
+  console.log('!auth');
   passport.authenticate('github'));
 
 app.get('/auth/github/callback',
+  console.log('!callback');
   passport.authenticate('github', {
     successRedirect: '/users',
     failureRedirect: '/'
