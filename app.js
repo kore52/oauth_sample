@@ -84,17 +84,18 @@ passport.use(new GitHubStrategy({
   }
 ));
 
-app.get('/auth/github',
+app.get('/auth/github', function(req, res) {
   console.log('!auth');
-  passport.authenticate('github'));
+  passport.authenticate('github');
+});
 
-app.get('/auth/github/callback',
+app.get('/auth/github/callback', function(req, res) {
   console.log('!callback');
   passport.authenticate('github', {
     successRedirect: '/users',
     failureRedirect: '/'
-  })
-);
+  });
+});
 
 
 app.use('/', routes);
