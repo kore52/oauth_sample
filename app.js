@@ -92,18 +92,13 @@ passport.deserializeUser(function(user, done) {
   done(null, user);
 });
 
-app.get('/auth/github', function(req, res) {
-  console.log('!auth');
-  passport.authenticate('github');
-});
+app.get('/auth/github', passport.authenticate('github'));
 
-app.get('/auth/github/callback', function(req, res) {
-  console.log('!callback');
-  passport.authenticate('github', {
-    successRedirect: '/users',
-    failureRedirect: '/'
-  });
-});
+app.get('/auth/github/callback', passport.authenticate('github', { failureRedirect: '/' }),
+  function (req, res) {
+    res.redirect('/users');
+  }
+);
 
 
 app.use('/', routes);
