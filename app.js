@@ -81,6 +81,7 @@ passport.use(new GitHubStrategy({
         db.users.insert({name: profile.username, provider: profile.provider});
       }
     });
+    return done(null, profile);
   }
 ));
 passport.serializeUser(function(user, done) {
