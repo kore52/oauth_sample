@@ -3,13 +3,11 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  var html = "mmm";
   if (req.isAuthenticated()) {
-    var html = "authenticated!";
-    html += "<p>authenticated as user:</p>";
-    html += "<pre>" + JSON.stringify(req.user, null, 4) + "</pre>";
+    res.render('users', { title: 'CTF Dashboard', username: req.user.username, profile: "<pre>" + JSON.stringify(req.user, null, 4) + "</pre>" });
+  } else {
+    res.redirect('../');
   }
-  res.send(html);
 });
 
 module.exports = router;
