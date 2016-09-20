@@ -28,7 +28,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
-  secret: 'the quick brown fox'
+  secret: 'the quick brown fox',
   resave: false,
   saveUninitialized: false,
   cookie: {
