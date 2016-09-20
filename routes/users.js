@@ -3,7 +3,13 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+  var html = "mmm";
+  if (req.isAuthenticated()) {
+    var html = "authenticated!";
+    html += "<p>authenticated as user:</p>";
+    html += "<pre>" + JSON.stringify(req.user, null, 4) + "</pre>";
+  }
+  res.send(html);
 });
 
 module.exports = router;
