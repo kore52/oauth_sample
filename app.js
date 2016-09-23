@@ -76,16 +76,6 @@ mongoose.Promise = global.Promise;
 mongoose.connect(mongodb_uri);
 var User = mongoose.model('User');
 var Score = mongoose.model('Score');
-////////////////////////////////////////////////////////////////
-// ユーザーデータベース処理
-/*
-var NeDB = require('nedb')
-var db = {}
-db.users = new NeDB({
-  filename: 'usersfile'
-});
-db.users.loadDatabase();
-*/
 
 ////////////////////////////////////////////////////////////////
 // 認証処理
@@ -95,39 +85,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-////////////////////////////////////////////////////////////////
-// ローカル認証
-/*
-var LocalStrategy = require('passport-local').Strategy;
-var crypto = require("crypto");
-passport.use(new LocalStrategy(
-  function(username, password, done) {
-    
-    // 入力されたパスワードからMD5ハッシュを作成
-    var md5 = crypto.createHash('md5');
-    md5.update(password);
-    var hash = md5.digest('hex');
-    
-    // 入力されたユーザー名・パスワードハッシュでDBを検索
-    db.users.find({name: username, password: hash}, function(err, user){
-      console.log('find', err, user);
-      if (err) {
-        console.log(err);
-        return done(err);
-      }
-      if (user.length == 0) {
-        console.log('User not found:', username);
-        return done(null, false);
-      }
-      
-      return done(null, user);
-    });
-  }
-));
-
-app.post('/auth/local',
-  passport.authenticate('local', { successRedirect: '/dashboard', failureRedirect: '/', failureFlash: 'Invalid username or password.' }));
-*/
 ////////////////////////////////////////////////////////////////
 // GitHubアカウントによるOAuth処理
 var GitHubStrategy = require('passport-github').Strategy;
@@ -149,8 +106,8 @@ passport.use(new GitHubStrategy({
       }
       return done(null, profile);
     });
-  }
-));
+  })
+);
 passport.serializeUser(function(user, done) {
   done(null, user);
 });
@@ -171,6 +128,8 @@ app.get('/auth/github/callback', passport.authenticate('github', { failureRedire
 app.use('/', routes);
 app.use('/login', login);
 app.use('/dashboard', sessionCheck, dashboard);
+var problem1 = require('./routes/problem/1');
+app.use('/problem/1', sessionCheck, problem1);
 
 
 app.get('/logout', function(req, res) {
