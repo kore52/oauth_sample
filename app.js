@@ -136,9 +136,9 @@ passport.use(new GitHubStrategy({
     callbackURL: authconfig.github.callbackURL,
   },
   function(token, tokenSecret, profile, done) {
-    User.find({provider: profile.provider, id: profile.id}, function(err, docs){
+    User.find({provider: profile.provider, provider_id: profile.id}, function(err, docs){
       if (docs.length == 0) {
-        var user = new User({ provider: profile.provider, id: profile.id, nickname: profile.name });
+        var user = new User({ provider: profile.provider, provider_id: profile.id, nickname: profile.name });
         user.save(function(err) {
           if (err) { console.log(err); }
         });
