@@ -25,9 +25,9 @@ router.post('/', function(req, res, next) {
     if (answer[post_id].answer == post_answer) {
       User.find({ provider: req.user.provider, provider_id: req.user.id }, function(err, user) {
         Score.find({ user_id: user._id, problem_id : post_id }, function(err, score) {
-          console.log(user._id.$oid, post_id);
+          console.log(user.stringyfied[0]._id, post_id);
           if (score.length == 0) {
-            var score = new Score({ user_id : user._id.$oid, problem_id : post_id, score : answer[post_id].score });
+            var score = new Score({ user_id : user.stringyfied[0]._id, problem_id : post_id, score : answer[post_id].score });
             score.save(function(err) {
               if (err) { console.log(err); }
             });
