@@ -27,7 +27,7 @@ mongoose.Promise = global.Promise;
 var User = mongoose.model('User');
 var Score = mongoose.model('Score');
 
-router.get('/', function(req, res, next) {
+router.post('/', function(req, res, next) {
   console.log('access answer');
   if (req.isAuthenticated()) {
     var answer = {
