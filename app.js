@@ -16,7 +16,6 @@ var partials = require('express-partials');
 var routes = require('./routes/index');
 var dashboard = require('./routes/dashboard');
 var answer = require('./routes/answer');
-//var register = require('./routes/register');
 var login = require('./routes/login');
 
 
@@ -130,6 +129,7 @@ app.use('/', routes);
 app.use('/login', login);
 app.use('/dashboard', sessionCheck, dashboard);
 app.use('/answer', sessionCheck, answer);
+
 var problem1 = require('./routes/problem/1');
 app.use('/problem/1', sessionCheck, problem1);
 

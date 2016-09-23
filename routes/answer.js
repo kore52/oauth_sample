@@ -23,11 +23,12 @@ var mongodb_uri = process.env.MONGODB_URI || '';
 //mongoose.model('User', UserSchema);
 mongoose.model('Score', ScoreSchema);
 mongoose.Promise = global.Promise;
-mongoose.connect(mongodb_uri);
+//mongoose.connect(mongodb_uri);
 var User = mongoose.model('User');
 var Score = mongoose.model('Score');
 
 router.get('/', function(req, res, next) {
+  console.log('access answer');
   if (req.isAuthenticated()) {
     var answer = {
       "1" : {
