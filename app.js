@@ -6,8 +6,8 @@ var mongoose = require('mongoose');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var flash = require('connect-flash');
-var globalTunnel = require('global-tunnel');
-globalTunnel.initialize();
+//var globalTunnel = require('global-tunnel');
+//globalTunnel.initialize();
 
 var session = require('express-session');
 var partials = require('express-partials');
@@ -95,9 +95,9 @@ app.use(passport.session());
 
 ////////////////////////////////////////////////////////////////
 // ローカル認証
+/*
 var LocalStrategy = require('passport-local').Strategy;
 var crypto = require("crypto");
-/*
 passport.use(new LocalStrategy(
   function(username, password, done) {
     
