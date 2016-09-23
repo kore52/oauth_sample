@@ -29,9 +29,10 @@ var Score = mongoose.model('Score');
 
 router.post('/', function(req, res, next) {
   console.log('access answer');
-  if (req.isAuthenticated()) {
+  if (!req.isAuthenticated()) {
     res.redirect('../');
   }
+  
   var answer = {
     "1" : {
       answer : "CTFTUTORIAL",
