@@ -1,8 +1,9 @@
 var express = require('express');
 var router = express.Router();
 
-var User = require('./models/User').User;
-var Score = require('./models/Score').Score;
+var model = require('./model.js');
+var User = model.User;
+var Score = model.Score;
 
 router.post('/', function(req, res, next) {
   console.log('access answer');
