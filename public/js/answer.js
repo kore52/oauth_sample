@@ -5,7 +5,7 @@ $('#btn_problem_1').click(function() {
     type: 'post',
     dataType: 'json',
     contentType: 'application/json',
-    data: JSON.stringify({ problem_1: answer }),
+    data: JSON.stringify({ problem_id: "problem_1", answer : answer }),
     success: function(data) {
       window.location.reload();
     },
