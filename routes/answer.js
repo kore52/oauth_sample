@@ -25,7 +25,6 @@ router.post('/', function(req, res, next) {
     if (answer[post_id].answer == post_answer) {
       User.find({ provider: req.user.provider, provider_id: req.user.id }, function(err, user) {
         Score.find({ user_id: user._id, problem_id : post_id }, function(err, score) {
-          console.log(user[0]._id, post_id);
           if (score.length == 0) {
             var score = new Score({ user_id : user[0]._id, problem_id : post_id, score : answer[post_id].score });
             score.save(function(err) {
@@ -33,7 +32,7 @@ router.post('/', function(req, res, next) {
             });
           }
         });
-        res.send("Valid answer.");
+        res.next(err);
       });
     } else {
       res.send("Invalid answer.");
