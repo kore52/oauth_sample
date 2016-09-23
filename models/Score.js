@@ -7,4 +7,4 @@ var ScoreSchema = new Schema({
   score: { type: Number }
 });
 
-exports.Score = mongoose.model('Score', ScoreSchema);
+module.exports.Score = mongoose.model('Score', ScoreSchema);
