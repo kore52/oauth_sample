@@ -8,22 +8,7 @@ router.get('/', function(req, res, next) {
     ////////////////////////////////////////////////////////////////
     // MongoDBèâä˙âª
     var Schema = mongoose.Schema;
-    var UserSchema = new Schema({
-      provider: { type: String, required: true },
-      provider_id: { type: String, required: true },
-      nickname: { type: String },
-      created: { type: Date, default: Date.now },
-      updated: { type: Date, default: Date.now }
-    });
-    var ScoreSchema = new Schema({
-      user_id: { type: String, required: true },
-      problem_id: { type: String, required: true },
-      score: { type: Number }
-    });
-
     var mongodb_uri = process.env.MONGODB_URI || '';
-    mongoose.model('User', UserSchema);
-    mongoose.model('Score', ScoreSchema);
     mongoose.Promise = global.Promise;
     mongoose.connect(mongodb_uri);
     var User = mongoose.model('User');
