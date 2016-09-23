@@ -69,9 +69,10 @@ var ScoreSchema = new Schema({
   score: { type: Number }
 });
 
+var mongolab_uri = process.env.MONGOLAB_URI || '';
 mongoose.model('User', UserSchema);
 mongoose.model('Score', ScoreSchema);
-mongoose.connect(MONGOLAB_URI);
+mongoose.connect(mongolab_uri);
 var User = mongoose.model('User');
 var Score = mongoose.model('Score');
 ////////////////////////////////////////////////////////////////
