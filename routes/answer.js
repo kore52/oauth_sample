@@ -6,7 +6,6 @@ var User = model.User;
 var Score = model.Score;
 
 router.post('/', function(req, res, next) {
-  console.log(req);
   
   if (!req.isAuthenticated()) {
     res.redirect('../');
