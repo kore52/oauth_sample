@@ -15,7 +15,7 @@ var partials = require('express-partials');
 
 ////////////////////////////////////////////////////////////////
 // MongoDB初期化
-var model = require('./model.js');
+var model = require('./model');
 var User = model.User;
 var Score = model.Score;
 
