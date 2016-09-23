@@ -4,7 +4,7 @@ var router = express.Router();
 // MongoDBèâä˙âª
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-/*
+
 var UserSchema = new Schema({
   provider: { type: String, required: true },
   provider_id: { type: String, required: true },
@@ -12,7 +12,7 @@ var UserSchema = new Schema({
   created: { type: Date, default: Date.now },
   updated: { type: Date, default: Date.now }
 });
-*/
+
 var ScoreSchema = new Schema({
   user_id: { type: String, required: true },
   problem_id: { type: String, required: true },
