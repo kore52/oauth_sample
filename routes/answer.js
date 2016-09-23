@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var model = require('./model');
+var model = require('../model');
 var User = model.User;
 var Score = model.Score;
 
