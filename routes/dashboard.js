@@ -6,8 +6,9 @@ router.get('/', function(req, res, next) {
     // ‰ñ“šó‹µ‚ğŒŸõ
     ////////////////////////////////////////////////////////////////
     // MongoDB‰Šú‰»
-    var User = require('./models/User').User;
-    var Score = require('./models/Score').Score;
+    var model = require('./model.js');
+    var User = model.User;
+    var Score = model.Score;
     
     User.find({ provider: req.user.provider, provider_id: req.user.id }, function(err, user) {
       Score.find({ user_id: user._id }, function(err, scores) {

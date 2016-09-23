@@ -8,8 +8,5 @@ var UserSchema = new Schema({
   created: { type: Date, default: Date.now },
   updated: { type: Date, default: Date.now }
 });
-var mongodb_uri = process.env.MONGODB_URI || '';
-mongoose.Promise = global.Promise;
-mongoose.connect(mongodb_uri);
 
 exports.User = mongoose.model('User', UserSchema);
