@@ -31,8 +31,8 @@ router.get('/', function(req, res, next) {
     User.find({ provider: req.user.provider, provider_id: req.user.id }, function(err, user) {
       Score.find({ user_id: user._id }, function(err, scores) {
         res.render('dashboard', { title: 'CTF Dashboard', nickname: req.user.username, profile: JSON.stringify(req.user, null, 4), scores: scores });
-      }
-    }
+      });
+    });
   } else {
     res.redirect('../');
   }
