@@ -6,7 +6,7 @@ router.get('/', function(req, res, next) {
     // ‰ñ“šó‹µ‚ğŒŸõ
     ////////////////////////////////////////////////////////////////
     // MongoDB‰Šú‰»
-    var model = require('./model.js');
+    var model = require('./model');
     var User = model.User;
     var Score = model.Score;
     
