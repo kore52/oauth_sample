@@ -12,7 +12,7 @@ router.post('/', function(req, res, next) {
   }
   
   var answer = {
-    "1" : {
+    "problem_1" : {
       answer : "CTFTUTORIAL",
       score : 30
     }
