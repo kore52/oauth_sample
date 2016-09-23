@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <%- partial('part_header', { title: 'CTF Dashboard' }) %>
+
+  <body>
+
+    <%- partial('part_navbar', { nickname: nickname, isLogin: true } ) %>
+
+    
+    <div class="container">
+      <div class="col-md-12 col-sm-12">
+      <h1 class="text-center">Problems</h1>
+      </div>
+      <div class="col-md-12 col-sm-12" style="margin-bottom: 50px">
+        <h3>Problem 1 : Tutorial</h3>
+        <button type="button" class="btn btn-default navbar-btn">Go</button>
+
+        <form action="#" method="post" role="form">
+          <div class="input-group col-md-4">
+            <input type="text" class="form-control" placeholder="Input flag" aria-describedby="input_Flag1">
+            <span class="input-group-btn"><button class="btn btn-default" type="button">Answer</button></span>
+          </div>
+        </form>
+        
+        <h3>Problem 2</h3>
+        <button type="button" class="btn btn-default navbar-btn">Go</button>
+
+        <form action="#" method="post" role="form">
+          <div class="input-group col-md-4">
+            <input type="text" class="form-control" placeholder="Input flag" aria-describedby="input_Flag1">
+            <span class="input-group-btn"><button class="btn btn-default" type="button">Answer</button></span>
+          </div>
+        </form>
+        
+        <h3>Problem 3</h3>
+        <button type="button" class="btn btn-default navbar-btn">Go</button>
+
+        <form action="#" method="post" role="form">
+          <div class="input-group col-md-4">
+            <input type="text" class="form-control" placeholder="Input flag" aria-describedby="input_Flag1">
+            <span class="input-group-btn"><button class="btn btn-default" type="button">Answer</button></span>
+          </div>
+        </form>
+        
+        <h3>Problem 4</h3>
+        <button type="button" class="btn btn-default navbar-btn">Go</button>
+
+        <form action="#" method="post" role="form">
+          <div class="input-group col-md-4">
+            <input type="text" class="form-control" placeholder="Input flag" aria-describedby="input_Flag1">
+            <span class="input-group-btn"><button class="btn btn-default" type="button">Answer</button></span>
+          </div>
+        </form>
+        
+      </div>
+      <pre><%= profile %></pre>
+    </div>
+    
+    <%- partial('part_footer') %>
+    
+  </body>
+</html>

@@ -3,7 +3,7 @@
   <%- partial('part_header', { title: 'CTF Login' }) %>
   <body>
 
-    <%- partial('part_navbar') %>
+    <%- partial('part_navbar', { nickname: "", isLogin: false } ) %>
 
     <div class="jumbotron">
       <div class="container">
@@ -14,28 +14,33 @@
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
           </div>
 
-          <div class="col-xs-4">
-            <form style="max-width:340px">
+          <div class="col-xs-4"><!--
+            <form action="/auth/local" method="post" role="form" style="max-width:340px">
               <div class="form-group">
                 <label for="inputUsername">ユーザー名</label>
-                <input type="username" class="form-control" id="inputUsername" placeholder="Username" style="width: 300px">
+                <input type="username" class="form-control" id="inputUsername" name="username" placeholder="Username" style="width: 300px">
               </div>
               <div class="form-group">
                 <label for="inputPassword">パスワード</label>
-                <input type="password" class="form-control" id="inputPassword" placeholder="Password" style="width: 300px">
+                <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Password" style="width: 300px">
                 <a>パスワードを忘れた場合は</a>
               </div>
+              <% var flashMessage = (Object.keys(message).length > 0) ? '<div class="alert alert-danger">' + message.error + '</div>' : '' %>
+              <%- flashMessage %>
               <div class="btn-group">
-                <button class="btn btn-default" type="submit">ログイン</button>
+                <button class="btn btn-primary" type="submit">ログイン</button>
               </div>
-            </form>
-            <p></p>
-            <div class="btn-group">
-              <a class="btn btn-xs" style="background-color:#333333;color:#fff" href="/auth/github">
+              <div class="btn-group">
+                <a class="btn btn-default" type="button" href="/subscribe">新規作成</button>
+              </div>
+            </form> -->
+            <h5>各種サービスアカウントでログイン</h5>
+            <div class="col-xs-12">
+              <a class="btn btn-lg btn-block" style="background-color:#333333;color:#fff" href="/auth/github">
                 <i class="fa fa-github" aria-hidden="true"></i>
                 GitHub
               </a>
-              <a class="btn btn-xs" style="background-color:#1da1f3;color:#fff">
+              <a class="btn btn-lg btn-block" style="background-color:#1da1f3;color:#fff" href="">
                 <i class="fa fa-twitter-square" aria-hidden="true"></i>
                 Twitter
               </a>
