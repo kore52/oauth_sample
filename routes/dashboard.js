@@ -1,18 +1,13 @@
 var express = require('express');
 var router = express.Router();
-var mongoose = require('mongoose');
 
 router.get('/', function(req, res, next) {
   if (req.isAuthenticated()) {
     // ‰ñ“šó‹µ‚ğŒŸõ
     ////////////////////////////////////////////////////////////////
     // MongoDB‰Šú‰»
-    var Schema = mongoose.Schema;
-    var mongodb_uri = process.env.MONGODB_URI || '';
-//    mongoose.Promise = global.Promise;
-//    mongoose.connect(mongodb_uri);
-    var User = mongoose.model('User');
-    var Score = mongoose.model('Score');
+    var User = require('./models/User').User;
+    var Score = require('./models/Score').Score;
     
     User.find({ provider: req.user.provider, provider_id: req.user.id }, function(err, user) {
       Score.find({ user_id: user._id }, function(err, scores) {
