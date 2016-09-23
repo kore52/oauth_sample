@@ -70,6 +70,7 @@ var ScoreSchema = new Schema({
 });
 
 var mongolab_uri = process.env.MONGOLAB_URI || '';
+console.log(mongolab_uri);
 mongoose.model('User', UserSchema);
 mongoose.model('Score', ScoreSchema);
 mongoose.connect(mongolab_uri);
