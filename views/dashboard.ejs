@@ -26,7 +26,7 @@
               <td><a class="btn btn-default" href="/problem/1">Go</a></td>
               <td id="answer_1">
                 <div class="input-group col-md-4">
-                  <pre>[<%= scores %>]</pre>
+                  <pre>[<%= JSON.stringify(scores, null, 4) %>]</pre>
                   <% if (scores.length != 0 /*&& scores["problem_1"].score >= 0*/) { %>
                     <span class="glyphicon glyphicon-ok" style="color:#3c763d" aria-hidden="true"></span>
                   <% } else { %>
