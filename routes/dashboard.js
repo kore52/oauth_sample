@@ -12,9 +12,10 @@ router.get('/', function(req, res, next) {
     
     User.find({ provider: req.user.provider, provider_id: req.user.id }, function(err, user) {
       Score.find({ user_id: user[0]._id }, function(err, scores) {
-        console.log(JSON.stringify(scores));
+        console.log(JSON.stringify(scores[0]));
         var dic_scores = {}
         for (var s in scores) {
+          console.log(JSON.stringify(s));
           dic_scores[s.problem_id] = s.score;
         }
         res.render('dashboard', { title: 'CTF Dashboard', nickname: req.user.username, profile: JSON.stringify(req.user, null, 4), scores: dic_scores });
