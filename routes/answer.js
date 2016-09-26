@@ -7,10 +7,7 @@ var Score = model.Score;
 
 router.post('/', function(req, res, next) {
   console.log(req.body);
-  if (!req.isAuthenticated()) {
-    res.redirect('../');
-  }
-  
+
   var answer = {
     "problem_1" : {
       answer : "CTFTUTORIAL",
@@ -29,16 +26,18 @@ router.post('/', function(req, res, next) {
             var score = new Score({ user_id : user[0]._id, problem_id : post_id, score : answer[post_id].score });
             score.save(function(err) {
               if (err) { console.log(err); }
+              else {
+                console.log('correct!');
             });
           }
         });
-        next();
+        res.redirect('/dashboard');
       });
     } else {
       res.send("Invalid answer.");
     }
   } catch (e) {
-    res.send("Invalid data.");
+    res.send(e);
   }
 });
 
