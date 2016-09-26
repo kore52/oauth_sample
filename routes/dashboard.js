@@ -12,6 +12,7 @@ router.get('/', function(req, res, next) {
     
     User.find({ provider: req.user.provider, provider_id: req.user.id }, function(err, user) {
       Score.find({ user_id: user[0]._id }, function(err, scores) {
+        console.log(JSON.stringify(scores));
         var dic_scores = {}
         for (var s in scores) {
           dic_scores[s.problem_id] = s.score;
