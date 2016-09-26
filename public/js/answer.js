@@ -8,11 +8,13 @@ $('#btn_problem_1').click(function() {
     data: JSON.stringify({ "problem_id" : "problem_1", "answer" : answer }),
     success: function(result) {
       if (result.status == "ok") {
-        
+        window.location.reload();
+      } else {
+        $('#description_1').innerHTML = '<div class="alert alert-danger" role="alert">' + status.status + '</div>';
       }
     },
     error: function(XHR, status, err) {
-      alert("NG:" + status.status + err + XHR);
+      
     }
   });
 });
