@@ -26,8 +26,7 @@ router.post('/', function(req, res, next) {
             var score = new Score({ user_id : user[0]._id, problem_id : post_id, score : answer[post_id].score });
             score.save(function(err) {
               if (err) { console.log(err); }
-              else {
-                console.log('correct!');
+              else { console.log('correct!'); }
             });
           }
         });
