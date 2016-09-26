@@ -15,7 +15,7 @@ router.get('/', function(req, res, next) {
         console.log(JSON.stringify(scores[0]));
         var dic_scores = {}
         scores.every(function(s) {
-          dic_scores[s.problem_id].score = s.score;
+          dic_scores[s.problem_id] = s.score;
         });
         res.render('dashboard', { title: 'CTF Dashboard', nickname: req.user.username, profile: JSON.stringify(req.user, null, 4), scores: dic_scores });
       });
