@@ -10,7 +10,7 @@ $('#btn_problem_1').click(function() {
       window.location.reload();
     },
     error: function(XHR, status, err) {
-      alert('error');
+      alert(err);
     }
   });
 });
