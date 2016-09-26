@@ -10,7 +10,7 @@ $('#btn_problem_1').click(function() {
       if (result.status == "ok") {
         window.location.reload();
       } else {
-        $('#description_1').innerHTML = '<div class="alert alert-danger" role="alert">' + status.status + '</div>';
+        $('#description_1').html('<div class="alert alert-danger" role="alert">' + result.status + '</div>');
       }
     },
     error: function(XHR, status, err) {
