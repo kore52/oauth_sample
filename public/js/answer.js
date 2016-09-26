@@ -7,7 +7,7 @@ $('#btn_problem_1').click(function() {
     contentType: 'application/json',
     data: JSON.stringify({ "problem_id" : "problem_1", "answer" : answer }),
     success: function(data) {
-      window.location.reload();
+      alert("success");
     },
     error: function(XHR, status, err) {
       alert(err);
