@@ -30,7 +30,7 @@ router.post('/', function(req, res, next) {
             });
           }
         });
-        res.redirect('/dashboard');
+        res.end("yes");
       });
     } else {
       res.send("Invalid answer.");
