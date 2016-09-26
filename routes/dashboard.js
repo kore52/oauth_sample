@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
     var Score = model.Score;
     
     User.find({ provider: req.user.provider, provider_id: req.user.id }, function(err, user) {
-      Score.find({ user_id: user._id }, function(err, scores) {
+      Score.find({ user_id: user[0]._id }, function(err, scores) {
         res.render('dashboard', { title: 'CTF Dashboard', nickname: req.user.username, profile: JSON.stringify(req.user, null, 4), scores: scores });
       });
     });
