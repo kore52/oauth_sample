@@ -32,7 +32,7 @@ router.post('/', function(req, res, next) {
             });
           }
         });
-        res.next(err);
+        next();
       });
     } else {
       res.send("Invalid answer.");
