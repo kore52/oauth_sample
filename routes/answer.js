@@ -30,10 +30,10 @@ router.post('/', function(req, res, next) {
             });
           }
         });
-        res.end("yes");
+        res.end("{'status' : 'ok'}");
       });
     } else {
-      res.send("Invalid answer.");
+      res.send("{'status' : 'Invalid answer'}");
     }
   } catch (e) {
     res.send(e);

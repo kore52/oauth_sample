@@ -10,7 +10,7 @@ $('#btn_problem_1').click(function() {
       alert("success");
     },
     error: function(XHR, status, err) {
-      alert(err);
+      alert("NG:" + status.status + err + XHR);
     }
   });
 });
