@@ -21,7 +21,9 @@ router.post('/', function(req, res, next) {
     
     if (answer[post_id].answer == post_answer) {
       User.find({ provider: req.user.provider, provider_id: req.user.id }, function(err, user) {
-        Score.find({ user_id: user._id, problem_id : post_id }, function(err, score) {
+      
+        // mongodbの_idを参照するには user[0]と添え字アクセスの必要あり
+        Score.find({ user_id: user[0]._id, problem_id : post_id }, function(err, score) {
           if (score.length == 0) {
             var score = new Score({ user_id : user[0]._id, problem_id : post_id, score : answer[post_id].score });
             score.save(function(err) {
@@ -33,7 +35,7 @@ router.post('/', function(req, res, next) {
         res.end('{"status":"ok"}');
       });
     } else {
-      res.send('{"status" : "Invalid answer"}');
+      res.send('{"status":"Invalid answer"}');
     }
   } catch (e) {
     res.send(e);
