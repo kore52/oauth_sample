@@ -2,27 +2,33 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/', function(req, res, next) {
-  if (req.isAuthenticated()) {
+    if (!req.isAuthenticated()) {
+        res.redirect('../');
+    }
+
+    var model = require('../model');
+
+    // –â‘èˆê——‚ğ“Ç‚İ‚İ
+    var Problem = model.Problem;
+    var problems;
+    Problem.find({}, function(err, p){
+      problems = p;
+    });
+    
     // ‰ñ“šó‹µ‚ğŒŸõ
     ////////////////////////////////////////////////////////////////
     // MongoDB‰Šú‰»
-    var model = require('../model');
     var User = model.User;
     var Score = model.Score;
-    
+
     User.find({ provider: req.user.provider, provider_id: req.user.id }, function(err, user) {
-      Score.find({ user_id: user[0]._id }, function(err, scores) {
-        console.log(JSON.stringify(scores[0]));
-        var dic_scores = {}
-        scores.every(function(s) {
-          dic_scores[s.problem_id] = s.score;
+        var answered = {}
+        user.answered_problem.split(',').every(function(p) {
+            answered[p] = true;
         });
-        res.render('dashboard', { title: 'CTF Dashboard', nickname: req.user.username, profile: JSON.stringify(req.user, null, 4), scores: dic_scores });
-      });
+        
+        res.render('dashboard', { title: 'CTF Dashboard', nickname: req.user.username, profile: JSON.stringify(req.user, null, 4), problems: problems, answered: answered });
     });
-  } else {
-    res.redirect('../');
-  }
 });
 
 module.exports = router;

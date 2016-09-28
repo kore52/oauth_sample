@@ -12,8 +12,18 @@ key exchange
 restoration private key
  > openssl genrsa -out private.key -des 256
 
+<protocol>
+dns query
+
+<web application>
+stupid password protection
 sql injection
 second order sql injection
 
 basic compilation of code
 
+<digital forensics>
+pcap wireshark
+
+<character code>
+minor code

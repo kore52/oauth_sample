@@ -11,31 +11,38 @@
       <div class="col-md-12 col-sm-12">
       <h1 class="text-center">Problems</h1>
       </div>
+        <h2>フラグを入力</h2>
+        <div class="input-group col-md-6 center-block">
+          <input id="answerbox" type="text" class="form-control" placeholder="Input flag" aria-describedby="input_Flag">
+          <span class="input-group-btn"><button id="btn_answer" class="btn btn-default" type="button">Answer</button></span>
+        </div>
+        <div class="alert"></div>
       <div class="col-md-12 col-sm-12" style="margin-bottom: 50px">
       
+
+        <h2>問題</h2>
         <table class="table table-hover">
           <thead>
             <tr>
-              <td>#</td><td>Subject</td><td>Challenge</td><td>Answer</td><td>Description</td>
+              <td>Id</td><td>標題</td><td>カテゴリ</td><td></td><td>状態</td>
             </tr>
           </thead>
           <tbody>
+            <% for (var i in problems) { %>
             <tr>
-              <td>1</td>
-              <td>Tutorial</td>
-              <td><a class="btn btn-default btn-xs" href="/problem/1" target="_blank">Go</a></td>
-              <td id="answer_1">
+              <td><%= problems[i].problem_id %></td>
+              <td><%= problems[i].subject %></td>
+              <td><%= problems[i].category %></td>
+              <td><a class="btn btn-default btn-xs" href="<%= problems[i].path %>" target="_blank">Go</a></td>
+              <td>
                 <div class="input-group col-md-4">
-                  <% if (scores.length != 0 && "problem_1" in scores) { %>
+                <% if (problems[i].problem_id in answered) { %>
                     <span class="glyphicon glyphicon-ok" style="color:#3c763d" aria-hidden="true"></span>
-                  <% } else { %>
-                    <input id="problem_1" type="text" class="form-control" placeholder="Input flag" aria-describedby="input_Flag">
-                    <span class="input-group-btn"><button id="btn_problem_1" class="btn btn-default btn-xs" type="button">Answer</button></span>
-                  <% } %>
+                <% } %>
                 </div>
               </td>
-              <td id="description_1"></td>
             </tr>
+            <% } %>
           </tbody>
         </table>
         

@@ -3,43 +3,34 @@ var router = express.Router();
 
 var model = require('../model');
 var User = model.User;
-var Score = model.Score;
+var Problem = model.Problem;
 
 router.post('/', function(req, res, next) {
-  console.log(req.body);
 
-  var answer = {
-    "problem_1" : {
-      answer : "CTFTUTORIAL",
-      score : 30
-    }
-  };
+    try {
+        var post_id = req.body.problem_id;
+        var post_answer = req.body.answer;
 
-  try {
-    var post_id = req.body.problem_id;
-    var post_answer = req.body.answer;
-    
-    if (answer[post_id].answer == post_answer) {
-      User.find({ provider: req.user.provider, provider_id: req.user.id }, function(err, user) {
-      
-        // mongodbの_idを参照するには user[0]と添え字アクセスの必要あり
-        Score.find({ user_id: user[0]._id, problem_id : post_id }, function(err, score) {
-          if (score.length == 0) {
-            var score = new Score({ user_id : user[0]._id, problem_id : post_id, score : answer[post_id].score });
-            score.save(function(err) {
-              if (err) { console.log(err); }
-              else { console.log('correct!'); }
+        Problem.find({ answer: post_answer }, function(err, problem) {
+            // フラグが一致する問題がない
+            if (problem.length == 0) {
+                res.send('{"status":"Invalid answer"}');
+            }
+            
+            // 正解
+            User.find({ provider: req.user.provider, provider_id: req.user.id }, function(err, user) {
+                // 正解一覧にproblem_idを追加
+                user.update({ provider: req.user.provider, provider_id: req.user.id },
+                    { answered_problem: user.answered_problem + "," + problem[0].problem_id });
             });
-          }
+
+            res.end('{"status":"ok"}');
+
         });
-        res.end('{"status":"ok"}');
-      });
-    } else {
-      res.send('{"status":"Invalid answer"}');
+
+    } catch (e) {
+        res.send(e);
     }
-  } catch (e) {
-    res.send(e);
-  }
 });
 
 module.exports = router;
