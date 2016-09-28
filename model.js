@@ -5,3 +5,4 @@ mongoose.connect(mongodb_uri);
 
 module.exports.User = require('./models/User').User;
 module.exports.Score = require('./models/Score').Score;
+module.exports.Problem = require('./models/Problem').Problem;
