@@ -22,6 +22,7 @@ router.get('/', function(req, res, next) {
     var Score = model.Score;
 
     User.find({ provider: req.user.provider, provider_id: req.user.id }, function(err, user) {
+        console.log(user);
         var answered = {}
         user.answered_problem.split(',').every(function(p) {
             answered[p] = true;
