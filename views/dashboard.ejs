@@ -35,11 +35,9 @@
               <td><%= problems[i].category %></td>
               <td><a class="btn btn-default btn-xs" href="<%= problems[i].path %>" target="_blank">Go</a></td>
               <td>
-                <div class="input-group col-md-4">
                 <% if (problems[i].problem_id in answered) { %>
                     <span class="glyphicon glyphicon-ok" style="color:#3c763d" aria-hidden="true"></span>
                 <% } %>
-                </div>
               </td>
             </tr>
             <% } %>
