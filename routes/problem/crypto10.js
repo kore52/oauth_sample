@@ -6,7 +6,7 @@ router.get('/', function(req, res, next) {
     res.redirect('../');
   }
 
-  res.render('./problem/crypto2', { title: 'à√çÜ2', nickname: req.user.username, profile: JSON.stringify(req.user, null, 4) });
+  res.render('./problem/crypto1', { title: 'à√çÜ1', nickname: req.user.username, profile: JSON.stringify(req.user, null, 4) });
 });
 
 module.exports = router;
