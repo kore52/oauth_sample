@@ -13,7 +13,7 @@ router.post('/', function(req, res, next) {
         Problem.findOne({ answer: postedAnswer }, function(err, problem) {
             // ƒtƒ‰ƒO‚ªˆê’v‚·‚é–â‘è‚ª‚È‚¢
             if (err) {
-                res.redirect('/dashboard?result=incorrect);
+                res.redirect('/dashboard?result=incorrect');
             }
             
             // ³‰ğ
@@ -34,7 +34,7 @@ router.post('/', function(req, res, next) {
             });
             
 
-            res.redirect('/dashboard?result=correct);
+            res.redirect('/dashboard?result=correct');
 
         });
 
