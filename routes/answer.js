@@ -8,13 +8,12 @@ var Problem = model.Problem;
 router.post('/', function(req, res, next) {
 
     try {
-        var post_id = req.body.problem_id;
-        var post_answer = req.body.answer;
+        var postedAnswer = req.body.answerbox;
 
-        Problem.findOne({ answer: post_answer }, function(err, problem) {
+        Problem.findOne({ answer: postedAnswer }, function(err, problem) {
             // ƒtƒ‰ƒO‚ªˆê’v‚·‚é–â‘è‚ª‚È‚¢
             if (err) {
-                res.send('{"status":"Invalid answer"}');
+                res.redirect('/dashboard?result=incorrect);
             }
             
             // ³‰ğ
@@ -35,7 +34,7 @@ router.post('/', function(req, res, next) {
             });
             
 
-            res.end('{"status":"ok"}');
+            res.redirect('/dashboard?result=correct);
 
         });
 
