@@ -27,7 +27,8 @@ router.post('/', function(req, res, next) {
                 User.update({ provider: req.user.provider, provider_id: req.user.id },
                     { answered_problem: user.answered_problem + "," + problem.problem_id });
                     
-                console.log(user, req.user);
+                console.log("user: " + user);
+                console.log("req:  " + req.user);
             });
 
             res.end('{"status":"ok"}');
