@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
     // ìnÇ≥ÇÍÇÈproblem_idÇÃñ‚ëËÇì«Ç›çûÇ›
     var Problem = model.Problem;
 
-    Problem.find({ problem_id: problem_id }, function(err, problem) {
+    Problem.find({ problem_id: req.params.problemId }, function(err, problem) {
         res.render('problem_pulic', { problem: problem });
     });
 });
