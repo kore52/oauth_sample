@@ -13,12 +13,11 @@ router.get('/', function(req, res, next) {
 
     Problem.find({ problem_id: req.params.problemId }, function(err, problem) {
         try {
-            if (problem.length == 1) {
-                res.render('problem_public', { problem: problem[0] });
-            } else {
-                throw "Problem not found";
-            }
-        } catch (e) {
+            if (problem.length < 1) throw "Problem not found";
+            if (problem.length > 1) throw "Problem data is duplicated";
+            res.render('problem_public', { problem: problem[0] });
+        }
+        catch (e) {
             res.send(e, false);
         }
     });
