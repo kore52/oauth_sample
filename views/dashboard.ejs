@@ -27,7 +27,7 @@
         <table class="table table-hover">
           <thead>
             <tr>
-              <th>Id</th><th>標題</th><th>カテゴリ</th><th></th><th>状態</th>
+              <th>Id</th><th>標題</th><th>カテゴリ</th><th>状態</th><th></th>
             </tr>
           </thead>
           <tbody>
@@ -36,12 +36,12 @@
               <td><%= problems[i].problem_id %></td>
               <td><%= problems[i].subject %></td>
               <td><%= problems[i].category %></td>
-              <td><a class="btn btn-default btn-xs" href="<%= problems[i].path %>" target="_blank">Go</a></td>
               <td>
                 <% if (problems[i].problem_id in answered) { %>
                     <span class="glyphicon glyphicon-ok" style="color:#3c763d" aria-hidden="true"></span>
                 <% } %>
               </td>
+              <td><a class="btn btn-default btn-xs" href="<%= problems[i].path %>" target="_blank">Go</a></td>
             </tr>
             <% } %>
           </tbody>
