@@ -11,11 +11,9 @@ router.post('/', function(req, res, next) {
         var post_id = req.body.problem_id;
         var post_answer = req.body.answer;
 
-        Problem.find({ answer: post_answer }, function(err, problems) {
-            var problem = problems[0];
-            
+        Problem.findOne({ answer: post_answer }, function(err, problem) {
             // ƒtƒ‰ƒO‚ªˆê’v‚·‚é–â‘è‚ª‚È‚¢
-            if (problems.length == 0) {
+            if (err) {
                 res.send('{"status":"Invalid answer"}');
             }
             
@@ -24,12 +22,14 @@ router.post('/', function(req, res, next) {
             User.findOne(condition, function(err, user) {
                 if (err) throw "user not found.";
                 var answered_list = user.answered_problem;
+                console.log(answered_list);
                 if (!problem.problem_id in answered_list) {
                     answered_list[problem.problem_id] = true;
                     var update = { answered_problem: answered_list };
                     User.findOneAndUpdate(condition, update, {new: true}, function(err, user) {
                         if (err) throw "user not found.";
                         console.log("user: " + user);
+                        console.log("ans: " + answered_list);
                     });
                 }
             });
