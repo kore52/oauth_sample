@@ -14,7 +14,7 @@ router.get('/', function(req, res, next) {
     Problem.find({}, function(err, p){
       problems = p;
     });
-    
+    console.log(req.params);
     // ‰ñ“šó‹µ‚ğŒŸõ
     ////////////////////////////////////////////////////////////////
     // MongoDB‰Šú‰»
