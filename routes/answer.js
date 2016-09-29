@@ -14,7 +14,7 @@ router.post('/', function(req, res, next) {
             // ƒtƒ‰ƒO‚ªˆê’v‚·‚é–â‘è‚ª‚È‚¢
             console.log(problem);
             if (problem == null || err) {
-                res.redirect('/dashboard?result=incorrect');
+                return res.redirect('/dashboard?result=incorrect');
             }
             
             // ³‰ğ
