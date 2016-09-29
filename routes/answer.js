@@ -11,18 +11,21 @@ router.post('/', function(req, res, next) {
         var post_id = req.body.problem_id;
         var post_answer = req.body.answer;
 
-        Problem.find({ answer: post_answer }, function(err, problem) {
+        Problem.find({ answer: post_answer }, function(err, problems) {
+            var problem = problems[0];
+            
             // ƒtƒ‰ƒO‚ªˆê’v‚·‚é–â‘è‚ª‚È‚¢
-            if (problem.length == 0) {
+            if (problems.length == 0) {
                 res.send('{"status":"Invalid answer"}');
             }
             
             // ³‰ğ
             User.find({ provider: req.user.provider, provider_id: req.user.id }, function(err, users) {
                 var user = users[0];
+                
                 // ³‰ğˆê——‚Éproblem_id‚ğ’Ç‰Á
-                user.update({ provider: req.user.provider, provider_id: req.user.id },
-                    { answered_problem: user.answered_problem + "," + problem[0].problem_id });
+                User.update({ provider: req.user.provider, provider_id: req.user.id },
+                    { answered_problem: user.answered_problem + "," + problem.problem_id });
             });
 
             res.end('{"status":"ok"}');
