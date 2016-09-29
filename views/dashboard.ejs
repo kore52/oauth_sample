@@ -21,7 +21,7 @@
         </div>
         <% if (result == "correct") { %>
         <div class="alert alert-success" role="alert">Congraturations!! Answer is correct.</div>
-        <% } else { %>
+        <% } else if (result == "incorrect") { %>
         <div class="alert alert-danger" role="alert">Answer is incorrect.</div>
         <% } %>        
       </div>
