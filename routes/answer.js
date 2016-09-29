@@ -21,11 +21,19 @@ router.post('/', function(req, res, next) {
             
             // ê≥â
             var condition = { provider: req.user.provider, provider_id: req.user.id };
-            var update = { answered_problem: user.answered_problem + "," + problem.problem_id };
-            User.findOneAndUpdate(condition, update, {new: true}, function(err, user) {
+            User.findOne(condition, function(err, user) {
                 if (err) throw "user not found.";
-                console.log("user: " + user);
+                var answered_list = user.answered_problem;
+                if (!problem.problem_id in answered_list) {
+                    answered_list[problem.problem_id] = true;
+                    var update = { answered_problem: answered_list };
+                    User.findOneAndUpdate(condition, update, {new: true}, function(err, user) {
+                        if (err) throw "user not found.";
+                        console.log("user: " + user);
+                    });
+                }
             });
+            
 
             res.end('{"status":"ok"}');
 
