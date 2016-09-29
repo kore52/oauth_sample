@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
     var Problem = model.Problem;
 
     Problem.find({ problem_id: req.params.problemId }, function(err, problem) {
-        res.render('problem_pulic', { problem: problem });
+        res.render('problem_public', { problem: problem });
     });
 });
 
