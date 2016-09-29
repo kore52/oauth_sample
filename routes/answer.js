@@ -12,10 +12,7 @@ router.post('/', function(req, res, next) {
 
         Problem.findOne({ flag: postedAnswer }, function(err, problem) {
         
-            console.log(postedAnswer);
-            console.log("pro:"+problem);
-            console.log("err:"+err);
-            // フラグが一致する問題がない
+            // フラグが一致する問題がない(不正解)
             if (problem == null || err) {
                 return res.redirect('/dashboard?result=incorrect');
             }
