@@ -11,6 +11,10 @@ router.post('/', function(req, res, next) {
         var postedAnswer = req.body.answerbox;
 
         Problem.findOne({ flag: postedAnswer }, function(err, problem) {
+        
+            console.log(postedAnswer);
+            console.log("pro:"+problem);
+            console.log("err:"+err);
             // ƒtƒ‰ƒO‚ªˆê’v‚·‚é–â‘è‚ª‚È‚¢
             if (problem == null || err) {
                 return res.redirect('/dashboard?result=incorrect');
@@ -21,14 +25,12 @@ router.post('/', function(req, res, next) {
             User.findOne(condition, function(err, user) {
                 if (err) throw "user not found.";
                 var answered_list = user.answered_problem;
-                console.log(answered_list);
+
                 if (!(problem.problem_id in answered_list)) {
                     answered_list[problem.problem_id] = true;
                     var update = { answered_problem: answered_list, updated: new Date().toISOString() };
                     User.findOneAndUpdate(condition, update, {new: true}, function(err, user) {
                         if (err) throw "user not found.";
-                        console.log("user: " + user);
-                        console.log("ans: " + answered_list);
                     });
                 }
             });
