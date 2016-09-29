@@ -3,10 +3,10 @@ var router = express.Router();
 
 router.get('/', function(req, res, next) {
     if (!req.isAuthenticated()) {
-        res.redirect('../');
+        res.redirect('../../');
     }
 
-    var model = require('../model');
+    var model = require('../../model');
 
     // “n‚³‚ê‚éproblem_id‚Ì–â‘è‚ğ“Ç‚İ‚İ
     var Problem = model.Problem;
