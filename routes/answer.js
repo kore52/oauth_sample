@@ -18,7 +18,8 @@ router.post('/', function(req, res, next) {
             }
             
             // ³‰ğ
-            User.find({ provider: req.user.provider, provider_id: req.user.id }, function(err, user) {
+            User.find({ provider: req.user.provider, provider_id: req.user.id }, function(err, users) {
+                var user = users[0];
                 // ³‰ğˆê——‚Éproblem_id‚ğ’Ç‰Á
                 user.update({ provider: req.user.provider, provider_id: req.user.id },
                     { answered_problem: user.answered_problem + "," + problem[0].problem_id });
