@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+var problemRouter = express.Router({mergeParams: true});
+router.use('/problem/', problemRouter);
 
 router.get('/', function(req, res, next) {
     if (!req.isAuthenticated()) {
@@ -23,14 +25,17 @@ router.get('/', function(req, res, next) {
 
     User.find({ provider: req.user.provider, provider_id: req.user.id }, function(err, users) {
         var user = users[0];
-        console.log(user);
-        var answered = {}
+        var answered = {};
         user.answered_problem.split(',').every(function(p) {
             answered[p] = true;
         });
         
         res.render('dashboard', { title: 'CTF Dashboard', nickname: req.user.username, profile: JSON.stringify(req.user, null, 4), problems: problems, answered: answered });
     });
+});
+
+router.get('/problem/:problemId', function(req, res, next) {
+    res.render(req.params.problemId, { title: req.params.problemId} );
 });
 
 module.exports = router;
