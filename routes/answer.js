@@ -23,7 +23,7 @@ router.post('/', function(req, res, next) {
                 if (err) throw "user not found.";
                 var answered_list = user.answered_problem;
                 console.log(answered_list);
-                if (!problem.problem_id in answered_list) {
+                if (!(problem.problem_id in answered_list)) {
                     answered_list[problem.problem_id] = true;
                     var update = { answered_problem: answered_list };
                     User.findOneAndUpdate(condition, update, {new: true}, function(err, user) {
