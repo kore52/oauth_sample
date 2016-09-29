@@ -19,7 +19,7 @@ router.get('/', function(req, res, next) {
             res.render('problem_public', { problem: problem[0] });
         }
         catch (e) {
-            res.status(503).send(e);
+            res.status(503).send(e + '<pre>'+req+ '</pre>');
         }
     });
 });

@@ -116,7 +116,7 @@ app.use('/dashboard', sessionCheck, dashboard);
 app.use('/answer', sessionCheck, answer);
 
 var problem = require('./routes/problem/problem_public');
-app.use('/problem/:problemId', sessionCheck, problem);
+app.use('/problem/:{problemId}', sessionCheck, problem);
 
 
 app.get('/logout', function(req, res) {
