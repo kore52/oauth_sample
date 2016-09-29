@@ -21,8 +21,6 @@ router.get('/', function(req, res, next) {
         } catch (e) {
             res.send(e, false);
         }
- else {
-        }
     });
 });
 
