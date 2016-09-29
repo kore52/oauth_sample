@@ -12,6 +12,7 @@ router.post('/', function(req, res, next) {
 
         Problem.findOne({ answer: postedAnswer }, function(err, problem) {
             // ƒtƒ‰ƒO‚ªˆê’v‚·‚é–â‘è‚ª‚È‚¢
+            console.log(problem);
             if (problem == null || err) {
                 res.redirect('/dashboard?result=incorrect');
             }
