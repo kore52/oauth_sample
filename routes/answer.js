@@ -10,7 +10,7 @@ router.post('/', function(req, res, next) {
     try {
         var postedAnswer = req.body.answerbox;
 
-        Problem.findOne({ answer: postedAnswer }, function(err, problem) {
+        Problem.findOne({ flag: postedAnswer }, function(err, problem) {
             // ƒtƒ‰ƒO‚ªˆê’v‚·‚é–â‘è‚ª‚È‚¢
             console.log(problem);
             if (problem == null || err) {
