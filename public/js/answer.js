@@ -9,6 +9,7 @@ $('#btn_answer').click(function() {
     success: function(result) {
       if (result.status == "ok") {
         window.location.reload();
+        $('#alert').html('<div class="alert alert-success" role="alert">' + result.status + '</div>');
       } else {
         $('#alert').html('<div class="alert alert-danger" role="alert">' + result.status + '</div>');
       }
