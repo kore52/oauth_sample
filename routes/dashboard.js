@@ -14,7 +14,7 @@ router.get('/', function(req, res, next) {
     Problem.find({}, function(err, p){
       problems = p;
     });
-    console.log(req);
+
     // ‰ñ“šó‹µ‚ğŒŸõ
     ////////////////////////////////////////////////////////////////
     // MongoDB‰Šú‰»
@@ -23,7 +23,7 @@ router.get('/', function(req, res, next) {
 
     var condition = { provider: req.user.provider, provider_id: req.user.id };
     User.findOne(condition, function(err, user) {
-        res.render('dashboard', { title: 'CTF Dashboard', nickname: req.user.username, profile: JSON.stringify(req.user, null, 4), problems: problems, answered: user.answered_problem, result: req.params.result });
+        res.render('dashboard', { title: 'CTF Dashboard', nickname: req.user.username, profile: JSON.stringify(req.user, null, 4), problems: problems, answered: user.answered_problem, result: req.query.result });
     });
 });
 
