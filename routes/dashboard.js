@@ -21,14 +21,9 @@ router.get('/', function(req, res, next) {
     var User = model.User;
     var Score = model.Score;
 
-    User.find({ provider: req.user.provider, provider_id: req.user.id }, function(err, users) {
-        var user = users[0];
-        var answered = {};
-        user.answered_problem.split(',').every(function(p) {
-            answered[p] = true;
-        });
-        
-        res.render('dashboard', { title: 'CTF Dashboard', nickname: req.user.username, profile: JSON.stringify(req.user, null, 4), problems: problems, answered: answered });
+    var condition = { provider: req.user.provider, provider_id: req.user.id };
+    User.findOne(condition, function(err, user) {
+        res.render('dashboard', { title: 'CTF Dashboard', nickname: req.user.username, profile: JSON.stringify(req.user, null, 4), problems: problems, answered: user.answered_problem });
     });
 });
 
