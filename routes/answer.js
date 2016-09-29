@@ -25,7 +25,7 @@ router.post('/', function(req, res, next) {
                 console.log(answered_list);
                 if (!(problem.problem_id in answered_list)) {
                     answered_list[problem.problem_id] = true;
-                    var update = { answered_problem: answered_list };
+                    var update = { answered_problem: answered_list, updated: new Date().toISOString() };
                     User.findOneAndUpdate(condition, update, {new: true}, function(err, user) {
                         if (err) throw "user not found.";
                         console.log("user: " + user);
