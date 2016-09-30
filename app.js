@@ -109,7 +109,7 @@ app.get('/auth/github/callback', passport.authenticate('github', { failureRedire
   }
 );
 
-
+/*
 ////////////////////////////////////////////////////////////////
 // TwitterアカウントによるOAuth処理
 var TwitterStrategy = require('passport-twitter').Strategy;
@@ -140,7 +140,7 @@ app.get('/auth/twitter/callback', passport.authenticate('twitter', { failureRedi
     res.redirect('/dashboard');
   }
 );
-
+*/
 
 ////////////////////////////////////////////////////////////////
 // GoogleアカウントによるOAuth処理
