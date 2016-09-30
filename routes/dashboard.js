@@ -14,7 +14,7 @@ router.get('/', function(req, res, next) {
     var dicProblems = {};
     Problem.find({}, function(err, p){
       problems = p;
-      dicProblems[p.problem_id] = p;
+      for ( var i in p ) dicProblems[p[i].problem_id] = p[i];
     });
 
     // ‰ñ“šó‹µ‚ğŒŸõ
