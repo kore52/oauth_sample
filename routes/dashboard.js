@@ -11,8 +11,10 @@ router.get('/', function(req, res, next) {
     // –â‘èˆê——‚ğ“Ç‚İ‚İ
     var Problem = model.Problem;
     var problems;
+    var dicProblems = {};
     Problem.find({}, function(err, p){
       problems = p;
+      dicProblems[p.problem_id] = p;
     });
 
     // ‰ñ“šó‹µ‚ğŒŸõ
@@ -26,7 +28,7 @@ router.get('/', function(req, res, next) {
     
         var score = 0;
         for (var pid in user.answered_problem) {
-            score += 
+            score += dicProblems[pid].score;
         }
         
         res.render('dashboard', {
