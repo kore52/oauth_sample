@@ -9,6 +9,11 @@ var ids = {
     clientID : "411708948435-jg78hpcd7f132d6e0vhb18cki1cmudg7.apps.googleusercontent.com",
     clientSecret : "AfWKGuN6tTl9lZ7rvCfL1z1P",
     callbackURL : "http://oauth-sample-001.herokuapp.com/auth/google/callback"
+  },
+  twitter : {
+    clientID : "",
+    clientSecret : "",
+    callbackURL : "http://oauth-sample-001.herokuapp.com/auth/twitter/callback"
   }
 }
 
