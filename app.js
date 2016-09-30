@@ -69,6 +69,13 @@ var passport = require('passport');
 app.use(passport.initialize());
 app.use(passport.session());
 
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+  done(null, user);
+});
 
 ////////////////////////////////////////////////////////////////
 // GitHubアカウントによるOAuth処理
@@ -93,13 +100,6 @@ passport.use(new GitHubStrategy({
     });
   })
 );
-passport.serializeUser(function(user, done) {
-  done(null, user);
-});
-
-passport.deserializeUser(function(user, done) {
-  done(null, user);
-});
 
 app.get('/auth/github', passport.authenticate('github'));
 app.get('/auth/github/callback', passport.authenticate('github', { failureRedirect: '/' }),
@@ -110,6 +110,70 @@ app.get('/auth/github/callback', passport.authenticate('github', { failureRedire
 );
 
 
+////////////////////////////////////////////////////////////////
+// TwitterアカウントによるOAuth処理
+var TwitterStrategy = require('passport-twitter').Strategy;
+passport.use(new TwitterStrategy({
+    clientID: authconfig.twitter.clientID,
+    clientSecret: authconfig.twitter.clientSecret,
+    callbackURL: authconfig.twitter.callbackURL,
+  },
+  function(token, tokenSecret, profile, done) {
+    User.find({provider: profile.provider, provider_id: profile.id}, function(err, docs){
+      if (docs.length == 0) {
+        var user = new User({ provider: profile.provider, provider_id: profile.id, nickname: profile.username });
+        user.save(function(err) {
+          if (err) { console.log(err); }
+        });
+      }
+      if (err) {
+        return done(err);
+      }
+      return done(null, profile);
+    });
+  })
+);
+app.get('/auth/twitter', passport.authenticate('twitter'));
+app.get('/auth/twitter/callback', passport.authenticate('twitter', { failureRedirect: '/' }),
+  function (req, res) {
+    req.session.user = {name: req.body.username};
+    res.redirect('/dashboard');
+  }
+);
+
+
+////////////////////////////////////////////////////////////////
+// GoogleアカウントによるOAuth処理
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+passport.use(new GoogleStrategy({
+    clientID: authconfig.google.clientID,
+    clientSecret: authconfig.google.clientSecret,
+    callbackURL: authconfig.google.callbackURL,
+  },
+  function(token, tokenSecret, profile, done) {
+    User.find({provider: profile.provider, provider_id: profile.id}, function(err, docs){
+      if (docs.length == 0) {
+        var user = new User({ provider: profile.provider, provider_id: profile.id, nickname: profile.username });
+        user.save(function(err) {
+          if (err) { console.log(err); }
+        });
+      }
+      if (err) {
+        return done(err);
+      }
+      return done(null, profile);
+    });
+  })
+);
+app.get('/auth/google', passport.authenticate('google'));
+app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/' }),
+  function (req, res) {
+    req.session.user = {name: req.body.username};
+    res.redirect('/dashboard');
+  }
+);
+
+///////////////////////////////////////
 app.use('/', routes);
 app.use('/login', login);
 app.use('/dashboard', sessionCheck, dashboard);
