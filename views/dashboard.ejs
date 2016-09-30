@@ -8,11 +8,20 @@
 
     
     <div class="container">
-      <div class="col-md-6 col-sm-12">
-        <h3>あなたのスコア: <%= score %>pt</h3>
+      <div class="col-md-12">
+        <h2 class="text-center">Capture the Flag</h2>
       </div>
+      
       <div class="col-md-6 col-sm-12">
-        <h2 class="text-center">Capture the flag</h2>
+        <div class="col-md-3 col-sm-6">
+          <h4>あなたのスコア:</h4>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <h4 class="text-primary"><%= score %>pt</h4>
+        </div>
+      </div>
+      
+      <div class="col-md-6 col-sm-12">
         <h3>フラグを入力</h3>
         <div class="center-block">
           <form method="post" action="/answer">
@@ -61,7 +70,6 @@
         </table>
         
       </div>
-      <pre><%= profile %></pre>
     </div>
     
     <%- partial('part_footer') %>
