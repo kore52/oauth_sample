@@ -12,7 +12,7 @@
         <h2 class="text-center">Capture the Flag</h2>
       </div>
       
-      <div class="col-md-8 col-sm-12">
+      <div class="col-md-8 col-sm-12" style="margin-bottom:10px">
         <h3>Flagを入力</h3>
         <div class="center-block">
           <form method="post" action="/answer">
@@ -33,11 +33,11 @@
         <% } %>
       </div>
 
-      <div class="col-md-4 col-sm-12 bg-info" style="height:100px;border-radius:3px;margin:5px">
-        <div class="col-md-6 col-sm-6" style="height:100%">
+      <div class="col-md-4 col-xs-12 bg-info" style="height:100px;border-radius:3px">
+        <div class="col-md-6 col-xs-6" style="height:100%">
           <p class="text-center" style="font-size:24px;line-height:100px">スコア:</p>
         </div>
-        <div class="col-md-6 col-sm-6" style="height:100%">
+        <div class="col-md-6 col-xs-6" style="height:100%">
           <p class="text-center text-info" style="line-height:100px">
             <span style="font-size:48px"><%= score %></span>
             <span><% if (score > 1) { %>pts<% } else { %>pt<% } %></span>
@@ -45,7 +45,7 @@
         </div>
       </div>
       
-      <div class="col-md-12 col-sm-12" style="margin-bottom: 50px">
+      <div class="col-md-12 col-xs-12" style="margin-bottom: 50px">
       
 
         <h3>問題</h3>
