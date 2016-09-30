@@ -144,10 +144,10 @@ app.get('/auth/twitter/callback', passport.authenticate('twitter', { failureRedi
 
 ////////////////////////////////////////////////////////////////
 // GoogleアカウントによるOAuth処理
-var GoogleStrategy = require('passport-google-oauth').Strategy;
+var GoogleStrategy = require('passport-google-oauth2').Strategy;
 passport.use(new GoogleStrategy({
-    consumerKey: authconfig.google.clientID,
-    consumerSecret: authconfig.google.clientSecret,
+    clientID: authconfig.google.clientID,
+    clientSecret: authconfig.google.clientSecret,
     callbackURL: authconfig.google.callbackURL,
   },
   function(token, tokenSecret, profile, done) {
