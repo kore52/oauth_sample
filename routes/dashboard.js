@@ -10,10 +10,10 @@ router.get('/', function(req, res, next) {
 
     // ñ‚ëËàÍóóÇì«Ç›çûÇ›
     var Problem = model.Problem;
-    var problems;
+//    var problems;
     var dicProblems = {};
     Problem.find({}, function(err, p){
-      problems = p;
+//      problems = p;
       for ( var i in p ) dicProblems[p[i].problem_id] = p[i];
     });
 
@@ -35,7 +35,7 @@ router.get('/', function(req, res, next) {
             title: 'CTF Dashboard',
             nickname: req.user.username,
             profile: JSON.stringify(req.user, null, 4),
-            problems: problems,
+            problems: dicProblems,
             answered: user.answered_problem,
             result: req.query.result,
             score: score
