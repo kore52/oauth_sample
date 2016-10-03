@@ -14,6 +14,7 @@ router.get('/', function(req, res, next) {
     var dicProblems = {};
     Problem.find().sort({program_id: 1}).exec(function(err, p) {
 //      problems = p;
+      console.log(p);
       for ( var i in p ) dicProblems[p[i].problem_id] = p[i];
     });
 
