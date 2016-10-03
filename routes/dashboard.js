@@ -25,10 +25,10 @@ router.get('/', function(req, res, next) {
 
     var condition = { provider: req.user.provider, provider_id: req.user.id };
     User.findOne(condition, function(err, user) {
-        console.log(dicProblems);
         var score = 0;
         for (var pid in user.answered_problem) {
-            score += dicProblems[pid].score;
+            if (pid in dicProblems)
+                score += dicProblems[pid].score;
         }
         
         res.render('dashboard', {
