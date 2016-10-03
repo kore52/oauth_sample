@@ -28,10 +28,10 @@ router.get('/', function(req, res, next) {
             if (pid in dicProblems)
                 score += dicProblems[pid].score;
         }
-        
+
         res.render('dashboard', {
             title: 'CTF Dashboard',
-            nickname: req.user.username,
+            nickname: user.nickname,
             profile: JSON.stringify(req.user, null, 4),
             problems: dicProblems,
             answered: user.answered_problem,
