@@ -10,10 +10,8 @@ router.get('/', function(req, res, next) {
 
     // –â‘èˆê——‚ğ“Ç‚İ‚İ
     var Problem = model.Problem;
-//    var problems;
     var dicProblems = {};
     Problem.find().sort({program_id: 1}).exec(function(err, p) {
-//      problems = p;
       for ( var i in p ) dicProblems[p[i].problem_id] = p[i];
     });
 
