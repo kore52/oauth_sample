@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
     var Problem = model.Problem;
 //    var problems;
     var dicProblems = {};
-    Problem.find({}, function(err, p){
+    Problem.find({}, {}, {sort:{program_id: 1}, function(err, p) {
 //      problems = p;
       for ( var i in p ) dicProblems[p[i].problem_id] = p[i];
     });
