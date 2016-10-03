@@ -52,7 +52,7 @@
         <table class="table table-hover">
           <thead>
             <tr>
-              <th>Id</th><th>標題</th><th>カテゴリ</th><th>正答</th><th></th>
+              <th>Id</th><th>標題</th><th>カテゴリ</th><th>配点</th><th>正答</th><th></th>
             </tr>
           </thead>
           <tbody>
@@ -61,6 +61,7 @@
               <td><%= problems[i].problem_id %></td>
               <td><%= problems[i].subject %></td>
               <td><%= problems[i].category %></td>
+              <td><%= problems[i].score %></td>
               <td>
                 <% if (problems[i].problem_id in answered) { %>
                     <span class="glyphicon glyphicon-ok" style="color:#3c763d" aria-hidden="true"></span>
