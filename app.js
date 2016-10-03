@@ -88,7 +88,7 @@ passport.use(new GitHubStrategy({
   function(token, tokenSecret, profile, done) {
     User.find({provider: profile.provider, provider_id: profile.id}, function(err, docs){
       if (docs.length == 0) {
-        var user = new User({ provider: profile.provider, provider_id: profile.id, nickname: profile.username||"no name", answered_problem: {} });
+        var user = new User({ provider: profile.provider, provider_id: profile.id, nickname: profile.username||"no name", answered_problem: {"dummy": true} });
         user.save(function(err) {
           if (err) { console.log(err); }
         });
@@ -153,7 +153,7 @@ passport.use(new GoogleStrategy({
   function(token, tokenSecret, profile, done) {
     User.find({provider: profile.provider, provider_id: profile.id}, function(err, docs){
       if (docs.length == 0) {
-        var user = new User({ provider: profile.provider, provider_id: profile.id, nickname: profile.username||"no name", answered_problem: {} });
+        var user = new User({ provider: profile.provider, provider_id: profile.id, nickname: profile.username||"no name", answered_problem: {"dummy": true} });
         user.save(function(err) {
           if (err) { console.log(err); }
         });
