@@ -14,7 +14,6 @@ router.get('/', function(req, res, next) {
     var dicProblems = {};
     Problem.find().sort({program_id: 1}).exec(function(err, p) {
 //      problems = p;
-      console.log(p);
       for ( var i in p ) dicProblems[p[i].problem_id] = p[i];
     });
 
@@ -26,7 +25,7 @@ router.get('/', function(req, res, next) {
 
     var condition = { provider: req.user.provider, provider_id: req.user.id };
     User.findOne(condition, function(err, user) {
-    
+        console.log(dicProblems);
         var score = 0;
         for (var pid in user.answered_problem) {
             score += dicProblems[pid].score;
