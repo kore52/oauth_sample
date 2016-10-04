@@ -11,8 +11,8 @@ var ids = {
     callbackURL : "http://oauth-sample-001.herokuapp.com/auth/google/callback"
   },
   twitter : {
-    clientID : "",
-    clientSecret : "",
+    clientID : "W2aQSFnT8sewq5sOAqNo3bV2n",
+    clientSecret : "jUGQD3VPzE84N82JzAfaJSNB2oDPhUl6mCVMQLX6yhE3mF94EF",
     callbackURL : "http://oauth-sample-001.herokuapp.com/auth/twitter/callback"
   }
 }
