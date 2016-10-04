@@ -16,6 +16,8 @@ router.get('/', function(req, res, next) {
         var User = model.User;
         var condition = { provider: req.user.provider, provider_id: req.user.id };
         User.findOne(condition, function(err, user) {
+            if (err) throw err;
+            console.log(user);
             var score = 0;
             for (var pid in user.answered_problem) {
                 for (var i = 0; i < problems.length; i++)
