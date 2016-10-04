@@ -14,7 +14,7 @@ router.get('/', function(req, res, next) {
 
         // ‰ñ“šó‹µ‚ğŒŸõ
         var User = model.User;
-        var condition = { provider: req.user.provider, provider_id: req.user.id };
+        var condition = { provider: req.user.provider, provider_id: req.user.provider_id };
         console.log(condition);
         User.findOne(condition, function(err, user) {
             if (err) throw err;
