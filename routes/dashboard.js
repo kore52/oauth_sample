@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
     // ñ‚ëËàÍóóÇì«Ç›çûÇ›
     var Problem = model.Problem;
     Problem.find().sort({ sort: 1}).exec(function(err, problems) {
-        console.log(problems);
+
         // âÒìöèÛãµÇåüçı
         var User = model.User;
         var condition = { provider: req.user.provider, provider_id: req.user.id };
@@ -23,17 +23,15 @@ router.get('/', function(req, res, next) {
                         score += problems[i].score;
             }
 
-    //        object_array_sort(problem, 'program_id', 'asc', function(sorted_data) {
-                res.render('dashboard', {
-                    title: 'CTF Dashboard',
-                    nickname: user.nickname,
-                    profile: JSON.stringify(req.user, null, 4),
-                    problems: problems,
-                    answered: user.answered_problem,
-                    result: req.query.result,
-                    score: score
-                });
-    //        });
+            res.render('dashboard', {
+                title: 'CTF Dashboard',
+                nickname: user.nickname,
+                profile: JSON.stringify(req.user, null, 4),
+                problems: problems,
+                answered: user.answered_problem,
+                result: req.query.result,
+                score: score
+            });
         });
     });
 });
