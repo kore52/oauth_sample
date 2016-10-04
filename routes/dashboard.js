@@ -10,10 +10,9 @@ router.get('/', function(req, res, next) {
 
     // –â‘èˆê——‚ğ“Ç‚İ‚İ
     var Problem = model.Problem;
-    Problem.find().sort({program_id: 1}).exec(function(err, problems) {
+    Problem.asc('program_id').exec(function(err, problems) {
 
         // ‰ñ“šó‹µ‚ğŒŸõ
-
         var User = model.User;
         var condition = { provider: req.user.provider, provider_id: req.user.id };
         User.findOne(condition, function(err, user) {
