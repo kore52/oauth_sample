@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <%- partial('part_header', { title: title }) %>
+
+  <body>
+
+    <%- partial('part_navbar', { nickname: nickname, isLogin: true } ) %>
+
+
+    <div class="container">
+      <div class="col-md-12 col-xs-12">
+        <form method="post" action="/dashboard">
+          <div class="form-group">
+            <label for="inputNickname">ニックネーム</label>
+            <input type="text" class="form-control" id="inputNickname"></input>
+          </div>
+          <button type="submit" class="btn btn-default">送信</button>
+        </form>
+      </div>
+    </div>
+
+    <%- partial('part_footer') %>
+
+  </body>
+</html>
