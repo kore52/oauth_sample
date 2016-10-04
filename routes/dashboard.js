@@ -19,9 +19,9 @@ router.get('/', function(req, res, next) {
         User.findOne(condition, function(err, user) {
             var score = 0;
             for (var pid in user.answered_problem) {
-                for (var problem in problems)
-                    if (pid == problem.problem_id)
-                        score += problem.score;
+                for (var i = 0; i < problems.length; i++)
+                    if (pid == problems[i].problem_id)
+                        score += problems[i].score;
             }
 
     //        object_array_sort(problem, 'program_id', 'asc', function(sorted_data) {
