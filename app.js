@@ -87,15 +87,12 @@ passport.use(new GitHubStrategy({
   },
   function(token, tokenSecret, profile, done) {
     User.find({provider: profile.provider, provider_id: profile.id}, function(err, docs){
-      if (docs.length == 0) {
-        var user = new User({ provider: profile.provider, provider_id: profile.id, nickname: profile.username||"no name", answered_problem: {"dummy": true} });
-        user.save(function(err) {
-          if (err) { console.log(err); }
-        });
-      }
-      if (err) {
-        return done(err);
-      }
+      if (err) return done(err);
+      if (user) return done(null, user);
+      var user = new User({ provider: profile.provider, provider_id: profile.id, nickname: profile.username });
+      user.save(function(err) {
+        if (err) throw err;
+      });
       return done(null, profile);
     });
   })
@@ -113,21 +110,18 @@ app.get('/auth/github/callback', passport.authenticate('github', { failureRedire
 // TwitterアカウントによるOAuth処理
 var TwitterStrategy = require('passport-twitter').Strategy;
 passport.use(new TwitterStrategy({
-    clientID: authconfig.twitter.clientID,
-    clientSecret: authconfig.twitter.clientSecret,
+    consumerKey: authconfig.twitter.consumerKey,
+    consumerSecret: authconfig.twitter.consumerSecret,
     callbackURL: authconfig.twitter.callbackURL,
   },
   function(token, tokenSecret, profile, done) {
-    User.find({provider: profile.provider, provider_id: profile.id}, function(err, docs){
-      if (docs.length == 0) {
-        var user = new User({ provider: profile.provider, provider_id: profile.id, nickname: profile.username });
-        user.save(function(err) {
-          if (err) { console.log(err); }
-        });
-      }
-      if (err) {
-        return done(err);
-      }
+    User.findOne({provider: profile.provider, provider_id: profile.id}, function(err, user){
+      if (err) return done(err);
+      if (user) return done(null, user);
+      var user = new User({ provider: profile.provider, provider_id: profile.id, nickname: profile.username });
+      user.save(function(err) {
+        if (err) throw err;
+      });
       return done(null, profile);
     });
   })
@@ -150,15 +144,12 @@ passport.use(new GoogleStrategy({
   },
   function(token, tokenSecret, profile, done) {
     User.find({provider: profile.provider, provider_id: profile.id}, function(err, docs){
-      if (docs.length == 0) {
-        var user = new User({ provider: profile.provider, provider_id: profile.id, nickname: profile.username||"no name", answered_problem: {"dummy": true} });
-        user.save(function(err) {
-          if (err) { console.log(err); }
-        });
-      }
-      if (err) {
-        return done(err);
-      }
+      if (err) return done(err);
+      if (user) return done(null, user);
+      var user = new User({ provider: profile.provider, provider_id: profile.id, nickname: profile.username });
+      user.save(function(err) {
+        if (err) throw err;
+      });
       return done(null, profile);
     });
   })
