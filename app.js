@@ -143,7 +143,7 @@ app.post('/dashboard', function(req, res){
     User.update({provider: profile.provider, provider_id: profile.profile.id}, {nickname: req.nickname}, function(err) {
       if (err) throw err;
       res.redirect('/dashboard');
-    }
+    });
   });
 });
 
