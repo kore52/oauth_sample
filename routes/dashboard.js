@@ -29,16 +29,42 @@ router.get('/', function(req, res, next) {
                 score += dicProblems[pid].score;
         }
 
-        res.render('dashboard', {
-            title: 'CTF Dashboard',
-            nickname: user.nickname,
-            profile: JSON.stringify(req.user, null, 4),
-            problems: dicProblems,
-            answered: user.answered_problem,
-            result: req.query.result,
-            score: score
+        object_array_sort(dicProblems, 'program_id', 'asc', function(sorted_data) {
+            res.render('dashboard', {
+                title: 'CTF Dashboard',
+                nickname: user.nickname,
+                profile: JSON.stringify(req.user, null, 4),
+                problems: sorted_data,
+                answered: user.answered_problem,
+                result: req.query.result,
+                score: score
+            });
         });
     });
+});
+
+//
+// 連想配列をkeyでソートする
+// order == 'asc' or 'desc'
+//
+function object_array_sort(data, key, order, func) {
+    var num_a = 1;
+    var num_b = -1;
+    
+    if (order == 'desc') {
+      num_a = -1;
+      num_b = 1;
+    }
+    
+    data = data.sort(function(a, b) {
+      var x = a[key];
+      var y = b[key];
+      if (x > y) return num_a;
+      if (x < y) return num_b;
+      return 0;
+    });
+  
+    func(data);
 });
 
 module.exports = router;
