@@ -19,10 +19,8 @@ router.get('/', function(req, res, next) {
           condition = { provider: req.user.provider, provider_id: req.user.id };
         else if (req.user.provider == 'twitter')
           condition = { provider: req.user.provider, provider_id: req.user.provider_id };
-        console.log(condition);
         User.findOne(condition, function(err, user) {
             if (err) throw err;
-            console.log(user, req.user);
             var score = 0;
             for (var pid in user.answered_problem) {
                 for (var i = 0; i < problems.length; i++)
