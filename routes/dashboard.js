@@ -10,35 +10,31 @@ router.get('/', function(req, res, next) {
 
     // ñ‚ëËàÍóóÇì«Ç›çûÇ›
     var Problem = model.Problem;
-    var dicProblems = {};
-    Problem.find().sort({program_id: 1}).exec(function(err, p) {
-      for ( var i in p ) dicProblems[p[i].problem_id] = p[i];
-    });
+    Problem.find().sort({program_id: 1}).exec(function(err, problems) {
 
-    // âÒìöèÛãµÇåüçı
-    ////////////////////////////////////////////////////////////////
-    // MongoDBèâä˙âª
-    var User = model.User;
-    var Score = model.Score;
+        // âÒìöèÛãµÇåüçı
 
-    var condition = { provider: req.user.provider, provider_id: req.user.id };
-    User.findOne(condition, function(err, user) {
-        var score = 0;
-        for (var pid in user.answered_problem) {
-            if (pid in dicProblems)
-                score += dicProblems[pid].score;
-        }
+        var User = model.User;
+        var condition = { provider: req.user.provider, provider_id: req.user.id };
+        User.findOne(condition, function(err, user) {
+            var score = 0;
+            for (var pid in user.answered_problem) {
+                for (var problem in problems)
+                    if (pid == problem.problem_id)
+                        score += problem.score;
+            }
 
-        object_array_sort(dicProblems, 'program_id', 'asc', function(sorted_data) {
-            res.render('dashboard', {
-                title: 'CTF Dashboard',
-                nickname: user.nickname,
-                profile: JSON.stringify(req.user, null, 4),
-                problems: sorted_data,
-                answered: user.answered_problem,
-                result: req.query.result,
-                score: score
-            });
+    //        object_array_sort(problem, 'program_id', 'asc', function(sorted_data) {
+                res.render('dashboard', {
+                    title: 'CTF Dashboard',
+                    nickname: user.nickname,
+                    profile: JSON.stringify(req.user, null, 4),
+                    problems: problems,
+                    answered: user.answered_problem,
+                    result: req.query.result,
+                    score: score
+                });
+    //        });
         });
     });
 });
