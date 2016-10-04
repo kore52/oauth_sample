@@ -89,7 +89,7 @@ passport.use(new GitHubStrategy({
     User.find({provider: profile.provider, provider_id: profile.id}, function(err, docs){
       if (err) return done(err);
       if (user) return done(null, user);
-      var user = new User({ provider: profile.provider, provider_id: profile.id, nickname: profile.username });
+      var user = new User({ provider: profile.provider, provider_id: profile.id, nickname: profile.username||"no name", answered_problem: {"dummy":true} });
       user.save(function(err) {
         if (err) throw err;
       });
@@ -118,7 +118,7 @@ passport.use(new TwitterStrategy({
     User.findOne({provider: profile.provider, provider_id: profile.id}, function(err, user){
       if (err) return done(err);
       if (user) return done(null, user);
-      var user = new User({ provider: profile.provider, provider_id: profile.id, nickname: profile.username });
+      var user = new User({ provider: profile.provider, provider_id: profile.id, nickname: profile.username||"no name", answered_problem: {"dummy":true} });
       user.save(function(err) {
         if (err) throw err;
       });
@@ -146,7 +146,7 @@ passport.use(new GoogleStrategy({
     User.find({provider: profile.provider, provider_id: profile.id}, function(err, docs){
       if (err) return done(err);
       if (user) return done(null, user);
-      var user = new User({ provider: profile.provider, provider_id: profile.id, nickname: profile.username });
+      var user = new User({ provider: profile.provider, provider_id: profile.id, nickname: profile.username||"no name", answered_problem: {"dummy":true} });
       user.save(function(err) {
         if (err) throw err;
       });
