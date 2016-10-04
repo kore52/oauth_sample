@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
 
     // –â‘èˆê——‚ğ“Ç‚İ‚İ
     var Problem = model.Problem;
-    Problem.find().sort({ program_id: 'asc'}).exec(function(err, problems) {
+    Problem.find().sort({ sort: 1}).exec(function(err, problems) {
         console.log(problems);
         // ‰ñ“šó‹µ‚ğŒŸõ
         var User = model.User;

@@ -8,7 +8,8 @@ var ProblemSchema = new Schema({
   description: { type: String },
   flag: { type: String },
   score: { type: Number },
-  path: { type: String }
+  path: { type: String },
+  sort: { type: Number }
 });
 
 module.exports.Problem = mongoose.model('Problem', ProblemSchema);
