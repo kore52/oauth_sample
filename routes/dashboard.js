@@ -65,6 +65,6 @@ function object_array_sort(data, key, order, func) {
     });
   
     func(data);
-});
+}
 
 module.exports = router;
