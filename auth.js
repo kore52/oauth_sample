@@ -11,7 +11,7 @@ var ids = {
     callbackURL : "http://oauth-sample-001.herokuapp.com/auth/google/callback"
   },
   twitter : {
-    consumerKey : "W2aQSFnT8sewq5sOAqNo3bV2n",
+    consumerKey : "W2aQSFnT8sewq5s0AqNo3bV2n",
     consumerSecret : "jUGQD3VPzE84N82JzAfaJSNB2oDPhUl6mCVMQLX6yhE3mF94EF",
     callbackURL : "http://oauth-sample-001.herokuapp.com/auth/twitter/callback"
   }
