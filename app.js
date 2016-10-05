@@ -27,6 +27,7 @@ var dashboard = require('./routes/dashboard');
 var answer = require('./routes/answer');
 var login = require('./routes/login');
 var settings = require('./routes/settings');
+var whatisctf = require('./routes/whatisctf');
 
 var app = express();
 
