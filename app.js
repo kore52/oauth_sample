@@ -52,7 +52,6 @@ app.use(session({
     maxAge: 30*60*1000
   }
 }));
-app.use(csurf());
 
 ////////////////////////////////////////////////////////////////
 // セッションチェック
@@ -171,14 +170,16 @@ app.get('/auth/google/callback', passport.authenticate('google', { failureRedire
 );
 
 ///////////////////////////////////////
+var base = express.Router();
+base.use(csurf());
+app.use(base);
 // 各種静的ページ
-app.use('/', routes);
-//app.use('/login', login);
-app.use('/dashboard', sessionCheck, dashboard);
-app.use('/answer', sessionCheck, answer);
-app.use('/settings', sessionCheck, settings);
-app.use('/whatisctf', whatisctf);
-app.get('/logout', function(req, res) {
+base.use('/', routes);
+base.use('/dashboard', sessionCheck, dashboard);
+base.use('/answer', sessionCheck, answer);
+base.use('/settings', sessionCheck, settings);
+base.use('/whatisctf', whatisctf);
+base.get('/logout', function(req, res) {
   delete req.session.user;
   res.redirect('/');
 });
@@ -187,6 +188,7 @@ app.get('/logout', function(req, res) {
 // 問題用ページ
 var problem = require('./routes/problem/problem_public');
 var csrfExcluded = express.Router();
+app.use(csrfExcluded);
 csrfExcluded.use('/problem', sessionCheck, problem);
 
 // catch 404 and forward to error handler
