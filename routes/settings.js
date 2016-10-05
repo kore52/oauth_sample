@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('settings', { title: '登録情報の変更' });
+  res.render('settings', { title: '登録情報の変更', nickname: req.user.nickname });
 });
 
 module.exports = router;
