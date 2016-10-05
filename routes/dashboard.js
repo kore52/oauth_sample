@@ -15,12 +15,14 @@ router.get('/', function(req, res, next) {
         // 回答状況を検索
         var User = model.User;
         var condition;
+        console.log("req.user:", req.user);
         if (req.user.provider == 'google' || req.user.provider == 'github')
           condition = { provider: req.user.provider, provider_id: req.user.id };
         else if (req.user.provider == 'twitter')
           condition = { provider: req.user.provider, provider_id: req.user.provider_id };
         User.findOne(condition, function(err, user) {
             if (err) throw err;
+            if (user == null) throw "User not found.";
             var score = 0;
             for (var pid in user.answered_problem) {
                 for (var i = 0; i < problems.length; i++)
@@ -29,7 +31,7 @@ router.get('/', function(req, res, next) {
             }
 
             res.render('dashboard', {
-                title: 'CTF Dashboard',
+                title: 'ダッシュボード',
                 nickname: user.nickname,
                 profile: JSON.stringify(req.user, null, 4),
                 problems: problems,
