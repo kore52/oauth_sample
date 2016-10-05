@@ -12,6 +12,7 @@ router.get('/:problemId', function(req, res, next) {
             res.render('problem_public', { problem: problem, csrfToken: req.csrfToken() });
         }
         catch (e) {
+            console.log(e);
             res.status(503).send(e);
         }
     });
