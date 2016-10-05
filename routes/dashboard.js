@@ -15,11 +15,12 @@ router.get('/', function(req, res, next) {
         // ‰ñ“šó‹µ‚ğŒŸõ
         var User = model.User;
         var condition;
-        console.log("req.user:", req.user);
+        console.log("req.user=", req.user);
         if (req.user.provider == 'google' || req.user.provider == 'github')
           condition = { provider: req.user.provider, provider_id: req.user.id };
         else if (req.user.provider == 'twitter')
           condition = { provider: req.user.provider, provider_id: req.user.provider_id };
+        console.log("condition=", condition);
         User.findOne(condition, function(err, user) {
             if (err) throw err;
             if (user == null) throw "User not found.";
