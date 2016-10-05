@@ -134,19 +134,6 @@ app.get('/auth/twitter/callback', passport.authenticate('twitter', { failureRedi
     res.redirect('/dashboard');
   }
 );
-app.post('/dashboard', function(req, res){
-  // ニックネームの変更
-  console.log(req);
-  console.log(req.profile);
-  var profile = req.profile;
-  User.findOne({provider: profile.provider, provider_id: profile.profile.id}, function(err, user){
-    if (err) return done(err);
-    User.update({provider: profile.provider, provider_id: profile.profile.id}, {nickname: req.nickname}, function(err) {
-      if (err) throw err;
-      res.redirect('/dashboard');
-    });
-  });
-});
 
 ////////////////////////////////////////////////////////////////
 // GoogleアカウントによるOAuth処理
