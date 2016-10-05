@@ -9,7 +9,7 @@ router.get('/:problemId', function(req, res, next) {
     Problem.findOne({ problem_id: req.params.problemId }, function(err, problem) {
         try {
             if (problem == null) throw "Problem not found.";
-            res.render('problem_public', { problem: problem, csrfToken: req.csrfToken() });
+            res.render('problem_public', { problem: problem });
         }
         catch (e) {
             console.log(e);
