@@ -8,8 +8,8 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res){
   // ニックネームの変更
-  console.log(req);
-  console.log(req.profile);
+  console.log("req::::::", req);
+  console.log("req:profile:::::", req.profile);
   var profile = req.profile;
   
   var model = require('../model');
