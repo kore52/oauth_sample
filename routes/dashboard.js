@@ -17,10 +17,10 @@ router.get('/', function(req, res, next) {
         var condition = { provider: req.user.provider, provider_id: req.user.provider_id };
 
         User.findOne(condition, function(err, user) {
-      console.log("user::::::::",user);
-      console.log("req.user::::",req.user);
             if (err) throw err;
-            if (user == null) throw "User not found.";
+            
+            // ユーザー新規作成の場合、作成が間に合わずnullが返る場合があるため、トップページにリダイレクトさせる。
+            if (user == null) res.redirect('/');
             var score = 0;
             for (var pid in user.answered_problem) {
                 for (var i = 0; i < problems.length; i++)

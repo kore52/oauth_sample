@@ -91,6 +91,8 @@ passport.use(new GitHubStrategy({
     User.findOne({provider: profile.provider, provider_id: profile.id}, function(err, user){
       if (err) return done(err);
       if (user) return done(null, user);
+
+      // ユーザーの新規作成
       var user = new User({ provider: profile.provider, provider_id: profile.id, nickname: profile.username||"no name", answered_problem: {"dummy":true} });
       user.save(function(err) {
         if (err) throw err;
@@ -120,6 +122,8 @@ passport.use(new TwitterStrategy({
     User.findOne({provider: profile.provider, provider_id: profile.id}, function(err, user){
       if (err) return done(err);
       if (user) return done(null, user);
+
+      // ユーザーの新規作成
       var user = new User({ provider: profile.provider, provider_id: profile.id, nickname: profile.username||"no name", answered_problem: {"dummy":true} });
       user.save(function(err) {
         if (err) throw err;
@@ -146,10 +150,10 @@ passport.use(new GoogleStrategy({
   },
   function(token, tokenSecret, profile, done) {
     User.findOne({provider: profile.provider, provider_id: profile.id}, function(err, user){
-      console.log("user::::::::",user);
-      console.log("prof::::::::",profile);
       if (err) return done(err);
       if (user) return done(null, user);
+      
+      // ユーザーの新規作成
       var user = new User({ provider: profile.provider, provider_id: profile.id, nickname: profile.username||"no name", answered_problem: {"dummy":true} });
       user.save(function(err) {
         if (err) throw err;
