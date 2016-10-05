@@ -21,6 +21,7 @@ router.get('/:problemId', function(req, res, next) {
 router.post('/webapp1', function(req, res, next) {
     var username = req.body.username;
     var password = req.body.password;
+    console.log(username, password);
     if (username == 'admin' && password == 'p@ssw0rd') {
         res.send('Flag is: STUPID_VALIDATION');
     } else {
