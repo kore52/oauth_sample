@@ -52,16 +52,7 @@ app.use(session({
     maxAge: 30*60*1000
   }
 }));
-var conditionalCSRF = function(req, res, next) {
-  var need = true;
-  if (req.path == '/problem/webapp1') need = false;
-  if (need) {
-    csurf(req, res, next);
-  } else {
-    next();
-  }
-}
-app.use(conditionalCSRF());
+app.use(csurf());
 
 ////////////////////////////////////////////////////////////////
 // セッションチェック
@@ -195,7 +186,8 @@ app.get('/logout', function(req, res) {
 
 // 問題用ページ
 var problem = require('./routes/problem/problem_public');
-app.use('/problem', sessionCheck, problem);
+var csrfExcluded = express.Router();
+csrfExcluded.use('/problem', sessionCheck, problem);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
