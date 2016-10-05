@@ -170,24 +170,21 @@ app.get('/auth/google/callback', passport.authenticate('google', { failureRedire
 );
 
 ///////////////////////////////////////
-var base = express.Router();
-base.use(csurf());
-// 各種静的ページ
-base.use('/', routes);
-base.use('/dashboard', sessionCheck, dashboard);
-base.use('/answer', sessionCheck, answer);
-base.use('/settings', sessionCheck, settings);
-base.use('/whatisctf', whatisctf);
-base.get('/logout', function(req, res) {
+app.use('/', routes);
+
+// 問題用ページ(app.use(csurf()))する前に設定
+var problem = require('./routes/problem/problem_public');
+app.use('/problem', sessionCheck, problem);
+
+app.use('/dashboard', sessionCheck, dashboard);
+app.use(csurf());
+app.use('/answer', sessionCheck, answer);
+app.use('/settings', sessionCheck, settings);
+app.use('/whatisctf', whatisctf);
+app.get('/logout', function(req, res) {
   delete req.session.user;
   res.redirect('/');
 });
-
-
-// 問題用ページ
-var problem = require('./routes/problem/problem_public');
-var csrfExcluded = express.Router();
-csrfExcluded.use('/problem', sessionCheck, problem);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
