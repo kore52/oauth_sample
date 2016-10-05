@@ -87,7 +87,7 @@ passport.use(new GitHubStrategy({
     callbackURL: authconfig.github.callbackURL,
   },
   function(token, tokenSecret, profile, done) {
-    User.find({provider: profile.provider, provider_id: profile.id}, function(err, docs){
+    User.findOne({provider: profile.provider, provider_id: profile.id}, function(err, user){
       if (err) return done(err);
       if (user) return done(null, user);
       var user = new User({ provider: profile.provider, provider_id: profile.id, nickname: profile.username||"no name", answered_problem: {"dummy":true} });
@@ -157,7 +157,7 @@ passport.use(new GoogleStrategy({
     callbackURL: authconfig.google.callbackURL,
   },
   function(token, tokenSecret, profile, done) {
-    User.find({provider: profile.provider, provider_id: profile.id}, function(err, docs){
+    User.findOne({provider: profile.provider, provider_id: profile.id}, function(err, user){
       if (err) return done(err);
       if (user) return done(null, user);
       var user = new User({ provider: profile.provider, provider_id: profile.id, nickname: profile.username||"no name", answered_problem: {"dummy":true} });
