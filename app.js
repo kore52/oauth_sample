@@ -172,7 +172,6 @@ app.get('/auth/google/callback', passport.authenticate('google', { failureRedire
 ///////////////////////////////////////
 var base = express.Router();
 base.use(csurf());
-app.use(base);
 // 各種静的ページ
 base.use('/', routes);
 base.use('/dashboard', sessionCheck, dashboard);
