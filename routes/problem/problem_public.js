@@ -22,7 +22,7 @@ router.post('/webapp1', function(req, res, next) {
     var username = req.body.username;
     var password = req.body.password;
     if (username == 'admin' && password == 'p@ssw0rd') {
-        res.send('Flag is: STUPID_VALIDATION');
+        res.render('problem/webapp1');
     } else {
         res.send('Invalid username or password.');
     }
