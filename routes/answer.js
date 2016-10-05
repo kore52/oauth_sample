@@ -18,11 +18,7 @@ router.post('/', function(req, res, next) {
             }
             
             // ê≥â
-            var condition;
-            if (req.user.provider == 'google')
-              condition = { provider: req.user.provider, provider_id: req.user.id };
-            else if (req.user.provider == 'twitter' || req.user.provider == 'github')
-              condition = { provider: req.user.provider, provider_id: req.user.provider_id };
+            var condition = { provider: req.user.provider, provider_id: req.user.provider_id };
 
             User.findOne(condition, function(err, user) {
                 if (err) throw err;
