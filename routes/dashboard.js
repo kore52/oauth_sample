@@ -17,6 +17,8 @@ router.get('/', function(req, res, next) {
         var condition = { provider: req.user.provider, provider_id: req.user.provider_id };
 
         User.findOne(condition, function(err, user) {
+      console.log("user::::::::",user);
+      console.log("req.user::::",req.user);
             if (err) throw err;
             if (user == null) throw "User not found.";
             var score = 0;

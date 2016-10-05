@@ -146,6 +146,8 @@ passport.use(new GoogleStrategy({
   },
   function(token, tokenSecret, profile, done) {
     User.findOne({provider: profile.provider, provider_id: profile.id}, function(err, user){
+      console.log("user::::::::",user);
+      console.log("prof::::::::",profile);
       if (err) return done(err);
       if (user) return done(null, user);
       var user = new User({ provider: profile.provider, provider_id: profile.id, nickname: profile.username||"no name", answered_problem: {"dummy":true} });
