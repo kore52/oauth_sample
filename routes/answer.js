@@ -18,10 +18,16 @@ router.post('/', function(req, res, next) {
             }
             
             // ê≥â
-            var condition = { provider: req.user.provider, provider_id: req.user.id };
+            var condition;
+            if (req.user.provider == 'google')
+              condition = { provider: req.user.provider, provider_id: req.user.id };
+            else if (req.user.provider == 'twitter' || req.user.provider == 'github')
+              condition = { provider: req.user.provider, provider_id: req.user.provider_id };
+
             User.findOne(condition, function(err, user) {
-                if (err) throw "user not found.";
-                var answered_list = user.answered_problem;
+                if (err) throw err;
+                if (user == null) throw "User not found.";
+                 var answered_list = user.answered_problem;
 
                 if (!(problem.problem_id in answered_list)) {
                     answered_list[problem.problem_id] = true;
