@@ -16,9 +16,9 @@ router.get('/', function(req, res, next) {
         var User = model.User;
         var condition;
         console.log("req.user=", req.user);
-        if (req.user.provider == 'google' || req.user.provider == 'github')
+        if (req.user.provider == 'google')
           condition = { provider: req.user.provider, provider_id: req.user.id };
-        else if (req.user.provider == 'twitter')
+        else if (req.user.provider == 'twitter' || req.user.provider == 'github')
           condition = { provider: req.user.provider, provider_id: req.user.provider_id };
         console.log("condition=", condition);
         User.findOne(condition, function(err, user) {
