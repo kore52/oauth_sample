@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+var csurf = require('csurf');
+router.use(csurf());
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -8,7 +10,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res){
   // ニックネームの変更
-  
+
   var model = require('../model');
   var User = model.User;
   User.findOne({provider: req.user.provider, provider_id: req.user.provider_id}, function(err, user){

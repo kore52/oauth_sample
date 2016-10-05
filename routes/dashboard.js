@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
-
+var csurf = require('csurf');
+router.use(csurf());
 router.get('/', function(req, res, next) {
     if (!req.isAuthenticated()) {
         res.redirect('../');
@@ -8,18 +9,18 @@ router.get('/', function(req, res, next) {
 
     var model = require('../model');
 
-    // –â‘èˆê——‚ğ“Ç‚İ‚İ
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ê——ï¿½ï¿½ï¿½Ç‚İï¿½ï¿½ï¿½
     var Problem = model.Problem;
     Problem.find().sort({ sort: 1}).exec(function(err, problems) {
 
-        // ‰ñ“šó‹µ‚ğŒŸõ
+        // ï¿½ñ“šó‹µ‚ï¿½ï¿½ï¿½ï¿½ï¿½
         var User = model.User;
         var condition = { provider: req.user.provider, provider_id: req.user.provider_id };
 
         User.findOne(condition, function(err, user) {
             if (err) throw err;
-            
-            // ƒ†[ƒU[V‹Kì¬‚Ìê‡Aì¬‚ªŠÔ‚É‡‚í‚¸null‚ª•Ô‚éê‡‚ª‚ ‚é‚½‚ßAƒgƒbƒvƒy[ƒW‚ÉƒŠƒ_ƒCƒŒƒNƒg‚³‚¹‚éB
+
+            // ï¿½ï¿½ï¿½[ï¿½Uï¿½[ï¿½Vï¿½Kï¿½ì¬ï¿½Ìê‡ï¿½Aï¿½ì¬ï¿½ï¿½ï¿½Ô‚Éï¿½ï¿½í‚¸nullï¿½ï¿½ï¿½Ô‚ï¿½ï¿½ê‡ï¿½ï¿½ï¿½ï¿½ï¿½é‚½ï¿½ßAï¿½gï¿½bï¿½vï¿½yï¿½[ï¿½Wï¿½Éƒï¿½ï¿½_ï¿½Cï¿½ï¿½ï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B
             if (user == null) res.redirect('/');
             var score = 0;
             for (var pid in user.answered_problem) {
@@ -29,7 +30,7 @@ router.get('/', function(req, res, next) {
             }
 
             res.render('dashboard', {
-                title: 'ƒ_ƒbƒVƒ…ƒ{[ƒh',
+                title: 'ï¿½_ï¿½bï¿½Vï¿½ï¿½ï¿½{ï¿½[ï¿½h',
                 nickname: user.nickname,
                 profile: JSON.stringify(req.user, null, 4),
                 problems: problems,

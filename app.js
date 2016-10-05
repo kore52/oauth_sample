@@ -176,7 +176,6 @@ app.use('/', routes);
 var problem = require('./routes/problem/problem_public');
 app.use('/problem', sessionCheck, problem);
 
-app.use(csurf());
 app.use('/dashboard', sessionCheck, dashboard);
 app.use('/answer', sessionCheck, answer);
 app.use('/settings', sessionCheck, settings);
