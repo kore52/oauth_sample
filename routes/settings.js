@@ -11,6 +11,8 @@ router.post('/', function(req, res){
   console.log(req);
   console.log(req.profile);
   var profile = req.profile;
+  
+  var model = require('../model');
   var User = model.User;
   User.findOne({provider: profile.provider, provider_id: profile.profile.id}, function(err, user){
     if (err) return done(err);
