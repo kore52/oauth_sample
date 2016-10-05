@@ -13,7 +13,7 @@ router.post('/', function(req, res){
   var User = model.User;
   User.findOne({provider: req.user.provider, provider_id: req.user.provider_id}, function(err, user){
     if (err) return done(err);
-    User.update({provider: req.user.provider, provider_id: req.user.provider_id}, {nickname: req.nickname}, function(err) {
+    User.update({provider: req.user.provider, provider_id: req.user.provider_id}, {nickname: req.body.nickname}, function(err) {
       if (err) throw err;
       res.redirect('/dashboard');
     });
