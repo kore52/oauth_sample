@@ -182,6 +182,7 @@ app.use('/login', login);
 app.use('/dashboard', sessionCheck, dashboard);
 app.use('/answer', sessionCheck, answer);
 app.use('/settings', sessionCheck, settings);
+app.use('/whatisctf', whatisctf);
 
 var problem = require('./routes/problem/problem_public');
 app.use('/problem', sessionCheck, problem);
