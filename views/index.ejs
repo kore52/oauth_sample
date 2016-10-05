@@ -2,7 +2,6 @@
 <html lang="ja">
   <%- partial('part_header', { title: 'CTF Login' }) %>
   <body>
-<div class="row">
 
     <%- partial('part_navbar_nologin') %>
 
@@ -50,16 +49,16 @@
               Google
             </a>
 
+            <!-- twitter -->
+            <a class="btn btn-lg btn-block" style="background-color:#4099ff;color:#fff" href="/auth/twitter">
+              <i class="fa fa-twitter" aria-hidden="true"></i>
+              Twitter
+            </a>
+
             <!-- github -->
             <a class="btn btn-lg btn-block" style="background-color:#333333;color:#fff" href="/auth/github">
               <i class="fa fa-github" aria-hidden="true"></i>
               GitHub
-            </a>
-
-            <!-- twitter -->
-            <a class="btn btn-lg btn-block" style="background-color:#4099ff;color:#fff" href="/auth/twitter">
-              <i class="fa fa-twitter" aria-hidden="true"></i>
-              twitter
             </a>
 
           </div>
@@ -69,6 +68,5 @@
     </div>
 
     <%- partial('part_footer') %>
-</div>
   </body>
 </html>
