@@ -8,15 +8,12 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res){
   // ニックネームの変更
-  console.log("req::::::", req);
-  console.log("req:profile:::::", req.profile);
-  var profile = req.profile;
   
   var model = require('../model');
   var User = model.User;
-  User.findOne({provider: profile.provider, provider_id: profile.profile.id}, function(err, user){
+  User.findOne({provider: req.user.provider, provider_id: req.user.provider_id}, function(err, user){
     if (err) return done(err);
-    User.update({provider: profile.provider, provider_id: profile.profile.id}, {nickname: req.nickname}, function(err) {
+    User.update({provider: req.user.provider, provider_id: req.user.provider_id}, {nickname: req.nickname}, function(err) {
       if (err) throw err;
       res.redirect('/dashboard');
     });
