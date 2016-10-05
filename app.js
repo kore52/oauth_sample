@@ -187,7 +187,6 @@ base.get('/logout', function(req, res) {
 // 問題用ページ
 var problem = require('./routes/problem/problem_public');
 var csrfExcluded = express.Router();
-app.use(csrfExcluded);
 csrfExcluded.use('/problem', sessionCheck, problem);
 
 // catch 404 and forward to error handler
