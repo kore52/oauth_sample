@@ -10,7 +10,7 @@ var flash = require('connect-flash');
 
 var session = require('express-session');
 var partials = require('express-partials');
-
+var csurf = require('csurf');
 
 
 ////////////////////////////////////////////////////////////////
@@ -52,6 +52,7 @@ app.use(session({
     maxAge: 30*60*1000
   }
 }));
+app.use(csurf());
 
 ////////////////////////////////////////////////////////////////
 // セッションチェック

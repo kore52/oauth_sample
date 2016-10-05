@@ -37,7 +37,8 @@ router.get('/', function(req, res, next) {
                 problems: problems,
                 answered: user.answered_problem,
                 result: req.query.result,
-                score: score
+                score: score,
+                csrfToken: req.csrfToken()
             });
         });
     });

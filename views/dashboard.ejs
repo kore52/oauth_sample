@@ -16,10 +16,11 @@
         <h4>Flagを入力</h4>
         <div class="center-block">
           <form method="post" action="/answer">
-          <div class="input-group">
-            <input name="answerbox" type="text" class="form-control" placeholder="Input flag" aria-describedby="input_Flag">
-            <span class="input-group-btn"><button id="btn_answer" class="btn btn-default" type="submit">Answer</button></span>
-          </div>
+            <div class="input-group">
+              <input name="answerbox" type="text" class="form-control" placeholder="Input flag" aria-describedby="input_Flag">
+              <span class="input-group-btn"><button id="btn_answer" class="btn btn-default" type="submit">Answer</button></span>
+            </div>
+            <input type="hidden" name="_csrf", value="<%= csrfToken %>">
           </form>
         </div>
         <% if (result == "correct") { %>
