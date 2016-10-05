@@ -52,7 +52,16 @@ app.use(session({
     maxAge: 30*60*1000
   }
 }));
-app.use(csurf());
+var conditionalCSRF = function(req, res, next) {
+  var need = true;
+  if (req.path == '/problem/webapp1') need = false;
+  if (need) {
+    csurf(req, res, next);
+  } else {
+    next();
+  }
+}
+app.use(conditionalCSRF());
 
 ////////////////////////////////////////////////////////////////
 // セッションチェック
@@ -152,7 +161,7 @@ passport.use(new GoogleStrategy({
     User.findOne({provider: profile.provider, provider_id: profile.id}, function(err, user){
       if (err) return done(err);
       if (user) return done(null, user);
-      
+
       // ユーザーの新規作成
       var user = new User({ provider: profile.provider, provider_id: profile.id, nickname: profile.username||"no name", answered_problem: {"dummy":true} });
       user.save(function(err) {
@@ -171,21 +180,22 @@ app.get('/auth/google/callback', passport.authenticate('google', { failureRedire
 );
 
 ///////////////////////////////////////
+// 各種静的ページ
 app.use('/', routes);
-app.use('/login', login);
+//app.use('/login', login);
 app.use('/dashboard', sessionCheck, dashboard);
 app.use('/answer', sessionCheck, answer);
 app.use('/settings', sessionCheck, settings);
 app.use('/whatisctf', whatisctf);
-
-var problem = require('./routes/problem/problem_public');
-app.use('/problem', sessionCheck, problem);
-
-
 app.get('/logout', function(req, res) {
   delete req.session.user;
   res.redirect('/');
 });
+
+
+// 問題用ページ
+var problem = require('./routes/problem/problem_public');
+app.use('/problem', sessionCheck, problem);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
