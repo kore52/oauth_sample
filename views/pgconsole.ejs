@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <%- partial('part_header', { title: "pgconsole" }) %>
+
+  <body>
+
+    <div class="container center-block">
+      <div class="col-sm-12 center-block">
+        <form method="post" action="/pgconsole">
+          Input
+          <textarea id="inputarea" name="inputarea"  class="form-control" rows="10"></textarea>
+        </form>
+          Output
+          <textarea id="outputarea" name="outputarea" class="form-control" rows="10"><%= output %></textarea>
+      </div>
+    </div>
+
+  </body>
+</html>
