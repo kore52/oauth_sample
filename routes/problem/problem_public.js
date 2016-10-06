@@ -30,4 +30,53 @@ router.post('/webapp1', function(req, res, next) {
         res.send('Invalid username or password.');
     }
 });
+
+router.post('/webapp2', function(req, res, next) {
+
+    var pg = require('pg');
+    var connectUri = 'postgres://ezrzhrxmxxlxoy:ZcZCltCwhhw5_2_j-LvsFL3CtD@ec2-54-163-239-28.compute-1.amazonaws.com:5432/d31svkp8aldqv1';
+    var client = new pg.Client(connectUri);
+    client.connect(function(err) {
+        if (err) {
+            return console.error('could not connect to pgsql', err);
+        }
+
+        var sql = "select username from userdb where username = '" + req.body.username + '";
+        
+        // SELECT以外のコマンドをエラー扱い
+        // INSERT, UPDATE, DELETE, TRUNCATE, REFERENCES, TRIGGER, CREATE, CONNECT, TEMPORARY, EXECUTE, and USAGE.
+        if ( sql.match(/insert/i)
+          || sql.match(/update/i)
+          || sql.match(/delete/i)
+          || sql.match(/truncate/i)
+          || sql.match(/references/i)
+          || sql.match(/trigger/i)
+          || sql.match(/create/i)
+          || sql.match(/connect/i)
+          || sql.match(/temporary/i)
+          || sql.match(/execute/i)
+          || sql.match(/usage/i)
+          || sql.match(/alter/i)
+          || sql.match(/revoke/i)
+          || sql.match(/grant/i)
+        ){
+            res.send('Invalid query.');
+        }
+        
+        client.query(sql, function(err, result) {
+            var outputString;
+            if(err) {
+                outputString = 'error running query. ' + err;
+                res.send('Invalid username or password.');
+            } else {
+                outputString = result;
+            }
+            client.end();
+            
+            res.render('webapp2', { output: outputString } );
+        });
+    });
+
+});
+
 module.exports = router;
