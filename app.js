@@ -28,6 +28,7 @@ var answer = require('./routes/answer');
 var login = require('./routes/login');
 var settings = require('./routes/settings');
 var whatisctf = require('./routes/whatisctf');
+var pgconsole = require('./routes/pgconsole');
 
 var app = express();
 
@@ -175,6 +176,7 @@ app.use('/', routes);
 // 問題用ページ(app.use(csurf()))する前に設定
 var problem = require('./routes/problem/problem_public');
 app.use('/problem', sessionCheck, problem);
+app.use('/pgconsole', pgconsole);
 
 app.use('/dashboard', sessionCheck, dashboard);
 app.use('/answer', sessionCheck, answer);
