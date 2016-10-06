@@ -16,14 +16,14 @@ router.post('/', function(req, res, next) {
         }
         console.log(req.body.inputarea);
         client.query(req.body.inputarea, function(err, result) {
-            var output;
+            var outputString;
             if(err) {
-                output = 'error running query. ' + err;
+                outputString = 'error running query. ' + err;
             } else {
-                output = result;
+                outputString = result;
             }
             client.end();
-            res.render('pgconsole', { output: output } );
+            res.render('pgconsole', { output: outputString } );
         });
     });
 });
