@@ -21,7 +21,10 @@ router.get('/:problemId', function(req, res, next) {
 router.post('/webapp1', function(req, res, next) {
     var username = req.body.username;
     var password = req.body.password;
-    if (username == 'admin' && password == 'p@ssw0rd') {
+    var md5sum = require('crypto').createHash('md5');
+    md5sum.update(username + password);
+    var digest = md5sum.digest('hex');
+    if (digest == 'f12070c20cf77e9103b88f8cc3ac8f80') {
         res.render('problem/webapp1');
     } else {
         res.send('Invalid username or password.');
