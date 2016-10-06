@@ -41,7 +41,9 @@ router.post('/webapp2', function(req, res, next) {
             return console.error('could not connect to pgsql', err);
         }
 
-        var sql = "select username from userdb where username = '" + req.body.username + "'";
+        var sql = "select username from userdb where username = '" + req.body.username + "' and password = md5('" + req.body.password + "');";
+        
+        console.log(sql);
         
         // SELECT以外のコマンドをエラー扱い
         // INSERT, UPDATE, DELETE, TRUNCATE, REFERENCES, TRIGGER, CREATE, CONNECT, TEMPORARY, EXECUTE, and USAGE.
@@ -65,15 +67,15 @@ router.post('/webapp2', function(req, res, next) {
         
         client.query(sql, function(err, result) {
             var outputString;
-            if(err) {
-                outputString = 'error running query. ' + err;
+            if(err || result.rowsCount == 0) {
                 res.send('Invalid username or password.');
             } else {
                 outputString = result;
             }
             client.end();
             
-            res.render('webapp2', { output: outputString } );
+            var username = result.rows[0].username;
+            res.render('webapp2', { output: outputString, username } );
         });
     });
 

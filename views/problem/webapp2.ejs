@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <%- partial('part_header', { title: "webapp2" }) %>
+
+  <body>
+
+    <div class="container center-block">
+      <div class="col-sm-12 center-block">
+        <% if ( username == 'admin' ) { %>
+        <h1 class="text-center">CONGRATURATIONS!!</h1>
+        <h1 class="text-center">YOU ARE THE ADMINISTRATOR.</h1>
+        <h4 class="text-center">Flag is: BASIC_SQL_INJECTION</h4>
+        <% } else { %>
+        <h3 class="text-center">Logged in.</h3>
+        <h3 class="text-center">But you are normal user.</h3>
+        <% } %>
+      </div>
+    </div>
+
+  </body>
+</html>
