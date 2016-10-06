@@ -80,6 +80,32 @@ passport.deserializeUser(function(user, done) {
 });
 
 ////////////////////////////////////////////////////////////////
+function findUser(token, tokenSecret, profile, done) {
+  User.findOne({provider: profile.provider, provider_id: profile.id}, function(err, user){
+    if (err) return done(err);
+    if (user) return done(null, user);
+
+    var crypto = require('crypto');
+    var md5sum = crypto.createHash('md5');
+    md5sum.update(profile.provider + profile.id);
+    var md5digest = md5sum.digest('hex');
+
+    // ユーザーの新規作成
+    var user = new User({
+        id: md5digest,
+        provider: profile.provider,
+        provider_id: profile.id,
+        nickname: profile.username||"no name",
+        answered_problem: {"dummy":true}
+    });
+    
+    user.save(function(err) {
+      if (err) throw err;
+    });
+    return done(null, profile);
+  });
+}
+
 // GitHubアカウントによるOAuth処理
 var GitHubStrategy = require('passport-github').Strategy;
 passport.use(new GitHubStrategy({
@@ -88,17 +114,7 @@ passport.use(new GitHubStrategy({
     callbackURL: authconfig.github.callbackURL,
   },
   function(token, tokenSecret, profile, done) {
-    User.findOne({provider: profile.provider, provider_id: profile.id}, function(err, user){
-      if (err) return done(err);
-      if (user) return done(null, user);
-
-      // ユーザーの新規作成
-      var user = new User({ provider: profile.provider, provider_id: profile.id, nickname: profile.username||"no name", answered_problem: {"dummy":true} });
-      user.save(function(err) {
-        if (err) throw err;
-      });
-      return done(null, profile);
-    });
+    findUser(token, tokenSecret, profile, done);
   })
 );
 
@@ -119,17 +135,7 @@ passport.use(new TwitterStrategy({
     callbackURL: authconfig.twitter.callbackURL,
   },
   function(token, tokenSecret, profile, done) {
-    User.findOne({provider: profile.provider, provider_id: profile.id}, function(err, user){
-      if (err) return done(err);
-      if (user) return done(null, user);
-
-      // ユーザーの新規作成
-      var user = new User({ provider: profile.provider, provider_id: profile.id, nickname: profile.username||"no name", answered_problem: {"dummy":true} });
-      user.save(function(err) {
-        if (err) throw err;
-      });
-      return done(null, profile);
-    });
+    findUser(token, tokenSecret, profile, done);
   })
 );
 app.get('/auth/twitter', passport.authenticate('twitter'));
@@ -149,17 +155,7 @@ passport.use(new GoogleStrategy({
     callbackURL: authconfig.google.callbackURL,
   },
   function(token, tokenSecret, profile, done) {
-    User.findOne({provider: profile.provider, provider_id: profile.id}, function(err, user){
-      if (err) return done(err);
-      if (user) return done(null, user);
-
-      // ユーザーの新規作成
-      var user = new User({ provider: profile.provider, provider_id: profile.id, nickname: profile.username||"no name", answered_problem: {"dummy":true} });
-      user.save(function(err) {
-        if (err) throw err;
-      });
-      return done(null, profile);
-    });
+    findUser(token, tokenSecret, profile, done);
   })
 );
 app.get('/auth/google', passport.authenticate('google', {scope: ['profile', 'email']}));

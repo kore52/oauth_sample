@@ -9,7 +9,8 @@ var ProblemSchema = new Schema({
   flag: { type: String },
   score: { type: Number },
   path: { type: String },
-  sort: { type: Number }
+  sort: { type: Number },
+  restrictions: { type: Boolean }
 });
 
 module.exports.Problem = mongoose.model('Problem', ProblemSchema);

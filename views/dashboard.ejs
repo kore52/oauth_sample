@@ -58,6 +58,7 @@
           </thead>
           <tbody>
             <% for (var i = 0; i < problems.length; i++) { %>
+            <%   if (!("restrictions" in problems[i]) || !(problems[i].restrictions) || isAdmin) { %>
             <tr>
               <td><%= problems[i].subject %></td>
               <td><%= problems[i].category %></td>
@@ -69,6 +70,7 @@
               </td>
               <td><a class="btn btn-default btn-xs" href="<%= problems[i].path %>" target="_blank">Go</a></td>
             </tr>
+            <%   } %>
             <% } %>
           </tbody>
         </table>
