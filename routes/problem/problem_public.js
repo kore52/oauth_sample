@@ -41,7 +41,7 @@ router.post('/webapp2', function(req, res, next) {
             return console.error('could not connect to pgsql', err);
         }
 
-        var sql = "select username from userdb where username = '" + req.body.username + '";
+        var sql = "select username from userdb where username = '" + req.body.username + "'";
         
         // SELECT以外のコマンドをエラー扱い
         // INSERT, UPDATE, DELETE, TRUNCATE, REFERENCES, TRIGGER, CREATE, CONNECT, TEMPORARY, EXECUTE, and USAGE.
