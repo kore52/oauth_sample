@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/', function(req, res, next) {
-    res.render('pgconsole');
+    res.render('pgconsole', { output: "" } );
 });
 
 router.post('/', function(req, res, next) {
