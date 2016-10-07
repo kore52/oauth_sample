@@ -4,7 +4,7 @@ var router = express.Router();
 router.get('/webapp3-api', function(res, req, next) {
   console.log(res);
   res.setHeader('Content-Type', 'application/json');
-  res.end(JSON.stringify({
+  res.send(JSON.stringify({
     "apiversion": "1.0",
     "status": "OK",
     "flag": "PEEKING_YOUR_RESPONSE" }));
