@@ -68,14 +68,10 @@ router.post('/webapp2', function(req, res, next) {
         client.query(sql, function(err, result) {
             client.end();
 
-            var outputString;
-            console.log(JSON.stringify(result));
-            if(err || result.rows.length == 0) {
-                return res.send('Invalid username or password.');
-            } else {
-                outputString = result;
-            }
-            
+            if (err) return res.send(err);
+            if (result.rows.length == 0) return res.send('Invalid username or password.');
+
+            var outputString = result;
             var username = res.body.username;
             res.render('problem/webapp2', { output: outputString, username } );
         });
