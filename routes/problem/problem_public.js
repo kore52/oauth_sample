@@ -41,8 +41,9 @@ router.post('/webapp2', function(req, res, next) {
             return console.error('could not connect to pgsql', err);
         }
         
-        var user = (req.body.username == undefined) ? "" : req.body.username;
-        var sql = "select username from userdb where username = '" + user + "' and password = md5('" + req.body.password + "');";
+        var user = ("username" in req.body) ? req.body.username : "";
+        var pass = ("password" in req.body) ? req.body.password : "";
+        var sql = "select username from userdb where username = '" + user + "' and password = md5('" + pass + "');";
         
         
         // SELECT以外のコマンドをエラー扱い
@@ -72,7 +73,7 @@ router.post('/webapp2', function(req, res, next) {
             if (result.rows.length == 0) return res.send('Invalid username or password.');
 
             var outputString = result;
-            var username = res.body.username;
+            var username = user;
             res.render('problem/webapp2', { output: outputString, username } );
         });
     });
