@@ -40,7 +40,7 @@ router.post('/webapp2', function(req, res, next) {
         if (err) {
             return console.error('could not connect to pgsql', err);
         }
-
+        
         var sql = "select username from userdb where username = '" + req.body.username + "' and password = md5('" + req.body.password + "');";
         
         console.log(sql);
