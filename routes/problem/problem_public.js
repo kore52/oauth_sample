@@ -3,16 +3,21 @@ var router = express.Router();
 
 router.get('/webapp3/api/add', function(req, res, next) {
 
-  var a = ("a" in req.query) ? req.query.a : 0;
-  var b = ("b" in req.query) ? req.query.b : 0;
-  
-  res.setHeader('content-type', 'application/json');
-  
-  res.send(JSON.stringify({
-    "apiversion": "1.0",
-    "status": "OK",
-    "result": a + b,
-    "flag": "PEEKING_YOUR_RESPONSE" }));
+    try {
+        var a = ("a" in req.query) ? parseInt(req.query.a) : 0;
+        var b = ("b" in req.query) ? parseInt(req.query.b) : 0;
+
+        res.setHeader('content-type', 'application/json');
+
+        res.send(JSON.stringify({
+            "apiversion": "1.0",
+            "status": "OK",
+            "result": a + b,
+            "flag": "PEEKING_YOUR_RESPONSE" }));
+
+    } catch(e) {
+        res.send(e);
+    }
 });
 
 router.get('/:problemId', function(req, res, next) {
