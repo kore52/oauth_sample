@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-router.get('/', function(res, req, next) {
+router.get('/', function(req, res, next) {
   res.send(JSON.stringify({
     "apiversion": "1.0",
     "status": "OK",
