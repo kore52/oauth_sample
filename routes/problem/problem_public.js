@@ -75,7 +75,7 @@ router.post('/webapp2', function(req, res, next) {
             client.end();
             
             var username = result.rows[0].username;
-            res.render('webapp2', { output: outputString, username } );
+            res.render('problem/webapp2', { output: outputString, username } );
         });
     });
 
