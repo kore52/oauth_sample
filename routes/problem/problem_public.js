@@ -79,4 +79,12 @@ router.post('/webapp2', function(req, res, next) {
 
 });
 
+router.get('/webapp3/api', function(res, req, next) {
+  res.contentType("application/json");
+  res.end(JSON.stringify({
+    "apiversion": "1.0",
+    "status": "OK",
+    "flag": "PEEKING_YOUR_RESPONSE" }));
+});
+
 module.exports = router;
