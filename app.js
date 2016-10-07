@@ -172,6 +172,9 @@ app.use('/', routes);
 // 問題用ページ(app.use(csurf()))する前に設定
 var problem = require('./routes/problem/problem_public');
 app.use('/problem', sessionCheck, problem);
+var webapp3  requiire('./routes/problem/webapp3');
+app.use('/webapp3/api', webapp3);
+
 app.use('/pgconsole', pgconsole);
 
 app.use('/dashboard', sessionCheck, dashboard);
