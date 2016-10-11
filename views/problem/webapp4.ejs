@@ -32,9 +32,9 @@
       data: JSON.stringify({ "query" : $('#input').val() }),
       success: function(data) {
         $('#logresult').empty();
-        $('#logresult').html('<table id="t_result" class="table table-striped"></table>');
+        $('#logresult').html('<table id="t_result" class="table table-striped"><thead><tr><th>ログ</th></tr></thead><tbody id="table_body"></tbody></table>');
         for (var i = 0; i <  data.result.length; i++) {
-          $('#t_result').append('<tr><td>' + data.result[i] + '</td></tr>')
+          $('#table_body').append('<tr><td>' + data.result[i] + '</td></tr>')
         }
       }
     });
