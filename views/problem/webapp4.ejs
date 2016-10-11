@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="ja">
-  <%- partial('part_header', { title: "ƒƒOŒŸõ" }) %>
+  <%- partial('part_header', { title: "ãƒ­ã‚°æ¤œç´¢" }) %>
 
   <body>
 
     <div class="container center-block">
       <div id="search">
-        ‘€ì—š—ğ‚ğŒŸõ
+        æ“ä½œå±¥æ­´ã‚’æ¤œç´¢
         <form id="logsearch" class="form-inline" acton="#">
           <div class="form-group">
-            <input type="text" class="form-control" id="input" placeholder="ŒŸõ">
+            <input type="text" class="form-control" id="input" placeholder="æ¤œç´¢">
           </div>
-          <button type="submit" class="btn btn-primary">ŒŸõ</button>
+          <button type="submit" class="btn btn-primary">æ¤œç´¢</button>
         </form>
         <div id="logresult"></div>
       </div>
@@ -35,7 +35,7 @@
         $('#t_result').append('<tr><td>' + result[i] + '</td></tr>')
       }
     }
-    return true;
+    return false;
   });
   </script>
 </html>
