@@ -12,7 +12,7 @@ router.post('/', function(req, res, next) {
     var query = (req.body.query != null) ? req.body.query : "";
     
     try {
-        var buf = fs.readFile('./logfile');
+        var buf = fs.readFileSync('./logfile');
         var match = new RegExp('(.*user=' + username + ' .*' + query + '.*)', 'gm');
         var result = buf.toString().match(match);
 
