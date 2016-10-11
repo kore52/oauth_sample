@@ -34,8 +34,7 @@
         $('#logresult').empty();
         $('#logresult').html('<table id="t_result" class="table table-striped"><thead><tr><th>ログ</th></tr></thead><tbody id="table_body"></tbody></table>');
         for (var i = 0; i <  data.result.length; i++) {
-          if ( data.result[i] != null || data.result[i] != "")
-            $('#table_body').append('<tr><td>' + data.result[i] + '</td></tr>')
+          $('#table_body').append('<tr><td>' + data.result[i] + '</td></tr>')
         }
       }
     });
