@@ -1,0 +1,40 @@
+[Apr 01 09:30:11 -0500] user=bob func=login
+[Apr 01 09:30:11 -0500] user=bob func=login status=success
+[Apr 01 09:31:07 -0500] user=bob func=search
+[Apr 01 09:31:35 -0500] user=bob func=search
+[Apr 01 09:32:01 -0500] user=bob func=search
+[Apr 01 09:32:09 -0500] user=bob func=detail code=AN1000084785
+[Apr 01 09:32:09 -0500] user=bob func=detail code=AN1000084874
+[Apr 01 09:33:11 -0500] user=alice func=search
+[Apr 01 09:34:10 -0500] user=alice func=search
+[Apr 01 09:34:26 -0500] user=alice func=login
+[Apr 01 09:34:26 -0500] user=alice func=login status=success
+[Apr 01 09:34:58 -0500] user=alice func=detail code=AN1000114787
+[Apr 01 09:34:58 -0500] user=bob func=detail code=AN1000035885
+[Apr 01 09:38:30 -0500] user=bob func=addcart code=AN1000035885
+[Apr 01 09:40:12 -0500] user=bob func=payment method=PAYPAL
+[Apr 01 09:43:49 -0500] user=bob func=confirm
+[Apr 01 09:45:14 -0500] user=bob func=order order_no=1495785235
+[Apr 01 09:45:51 -0500] user=carol func=login
+[Apr 01 09:45:51 -0500] user=carol func=login status=success
+[Apr 01 09:46:56 -0500] user=alice func=search
+[Apr 01 09:46:56 -0500] user=carol func=search
+[Apr 01 09:51:14 -0500] user=alice func=search
+[Apr 01 10:22:42 -0500] user=alice func=detail code=AN1000114789
+[Apr 01 10:25:34 -0500] user=alice func=addcart code=AN1000114789 amount=1
+[Apr 01 10:32:50 -0500] user=alice func=payment method=AMEX
+[Apr 01 10:33:07 -0500] user=alice func=confirm
+[Apr 01 10:35:12 -0500] user=alice func=order order_no=1495785236
+[Apr 01 12:47:02 -0500] user=charlie func=login
+[Apr 01 12:47:02 -0500] user=charlie func=login status=failure
+[Apr 01 12:48:05 -0500] user=charlie func=login
+[Apr 01 12:48:05 -0500] user=charlie func=login status=failure
+[Apr 01 12:48:17 -0500] user=bob FL@G: INVASION_OF_PRIVACY
+[Apr 01 12:48:25 -0500] user=charlie func=login
+[Apr 01 12:48:25 -0500] user=charlie func=login status=success
+[Apr 01 12:52:10 -0500] user=charlie func=search
+[Apr 01 12:52:18 -0500] user=charlie func=search
+[Apr 01 12:52:25 -0500] user=charlie func=search
+[Apr 01 12:52:37 -0500] user=charlie func=search
+[Apr 01 12:52:50 -0500] user=charlie func=search
+[Apr 01 18:00:00 -0500] user=bob session timed out

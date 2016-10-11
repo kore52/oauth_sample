@@ -1,0 +1,35 @@
+[Apr 01 09:30:11] LOGIN: user=bob
+[Apr 01 09:30:11] LOGIN: user=bob status=success
+[Apr 01 09:31:07] SEARCH: user=bob
+[Apr 01 09:31:35] SEARCH: user=bob
+[Apr 01 09:32:01] SEARCH: user=bob
+[Apr 01 09:32:09] DETAIL: user=bob code=AN1000084785
+[Apr 01 09:32:09] DETAIL: user=bob code=AN1000084874
+[Apr 01 09:33:11] SEARCH: user=alice
+[Apr 01 09:34:10] SEARCH: user=alice
+[Apr 01 09:34:26] LOGIN: user=alice
+[Apr 01 09:34:26] LOGIN: user=alice status=success
+[Apr 01 09:34:58] DETAIL: user=alice code=AN1000114787
+[Apr 01 09:34:58] DETAIL: user=bob code=AN1000035885
+[Apr 01 09:45:51] LOGIN: user=carol
+[Apr 01 09:45:51] LOGIN: user=carol status=success
+[Apr 01 09:46:56] SEARCH: user=alice
+[Apr 01 09:46:56] SEARCH: user=carol
+[Apr 01 09:51:14] SEARCH: user=alice
+[Apr 01 10:22:42] DETAIL: user=alice code=AN1000114789
+[Apr 01 10:25:34] ADDCART: user=alice code=AN1000114789 amount=1
+[Apr 01 10:32:50] PAYMENT: user=alice method=AMEX
+[Apr 01 10:33:07] CONFIRM: user=alice
+[Apr 01 10:35:12] ORDER: user=alice order=1495785236
+[Apr 01 12:47:02] LOGIN: user=charlie
+[Apr 01 12:47:02] LOGIN: user=charlie status=failure
+[Apr 01 12:48:05] LOGIN: user=charlie
+[Apr 01 12:48:05] LOGIN: user=charlie status=failure
+[Apr 01 12:48:17] FLAG: INVASION_OF_PRIVACY
+[Apr 01 12:48:25] LOGIN: user=charlie
+[Apr 01 12:48:25] LOGIN: user=charlie status=success
+[Apr 01 12:52:10] SEARCH: user=charlie
+[Apr 01 12:52:18] SEARCH: user=charlie
+[Apr 01 12:52:25] SEARCH: user=charlie
+[Apr 01 12:52:37] SEARCH: user=charlie
+[Apr 01 12:52:50] SEARCH: user=charlie

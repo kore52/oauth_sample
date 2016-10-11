@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <%- partial('part_header', { title: "ƒƒOŒŸõ" }) %>
+
+  <body>
+
+    <div class="container center-block">
+      <div id="search">
+        ‘€ì—š—ğ‚ğŒŸõ
+        <form id="logsearch" class="form-inline" acton="#">
+          <div class="form-group">
+            <input type="text" class="form-control" id="input" placeholder="ŒŸõ">
+          </div>
+          <button type="submit" class="btn btn-primary">ŒŸõ</button>
+        </form>
+        <div id="logresult"></div>
+      </div>
+    </div>
+
+  </body>
+  
+  <script type="text/javascript">
+  $('#logsearch').submit(function() {
+    $.ajax({
+    url: '/dedicated/webapp4',
+    type: 'post',
+    dataType: 'json',
+    contentType: 'application/json',
+    data: JSON.stringify({ "query" : $('#input').val() }),
+    success: function(result) {
+      result = result[0];
+      $('#logresult').empty();
+      $('#logresult').html('<table id="t_result" class="table table-striped"></table>');
+      for (var i = 0; i < result.length; i++) {
+        $('#t_result').append('<tr><td>' + result[i] + '</td></tr>')
+      }
+    }
+    return true;
+  });
+  </script>
+</html>
