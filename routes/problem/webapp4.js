@@ -11,12 +11,16 @@ router.post('/', function(req, res, next) {
     var username='alice';
     var query = (req.body.query != null) ? req.body.query : "";
     
-    var buf = fs.readFileSync('./logfile2');
-    var match = new RegExp('(.*user=' + username + ' .*' + query + '.*)', 'gm');
+    try {
+        var buf = fs.readFileSync('./logfile2');
+        var match = new RegExp('(.*user=' + username + ' .*' + query + '.*)', 'gm');
+        var result = buf.toString().match(match);
 
-    var result = buf.toString().match(match);
-
-    res.send({result});
+        res.send({result});
+    } catch(e) {
+        console.log(e);
+        res.send(e);
+    }
 });
 
 module.exports = router;
