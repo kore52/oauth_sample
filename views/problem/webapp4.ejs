@@ -6,7 +6,8 @@
 
     <div class="container center-block">
       <div id="search">
-        操作履歴を検索
+        <p>ユーザー名: alice</p>
+        <p>操作履歴を検索</p>
         <form id="logsearch" class="form-inline" action="#">
           <div class="form-group">
             <input type="text" class="form-control" id="input" placeholder="検索">
@@ -29,7 +30,6 @@
       contentType: 'application/json',
       data: JSON.stringify({ "query" : $('#input').val() }),
       success: function(result) {
-        result = result[0];
         $('#logresult').empty();
         $('#logresult').html('<table id="t_result" class="table table-striped"></table>');
         for (var i = 0; i < result.length; i++) {
