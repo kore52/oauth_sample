@@ -11,7 +11,7 @@ router.post('/', function(req, res, next) {
     var username='alice';
     var query = (req.body.query != null) ? req.body.query : "";
     
-    var buf = fs.readFileSync('./logfile');
+    var buf = fs.readFileSync('./logfile.log');
     var match = new RegExp('(.*user=' + username + ' .*' + query + '.*)', 'gm');
 
     var result = buf.toString().match(match);
