@@ -171,8 +171,8 @@ app.use('/', routes);
 
 var problem = require('./routes/problem/problem_public');
 app.use('/problem', sessionCheck, problem);
-var webapp4 = require('./routes/problem/webapp4');
-app.use('/dedicated/webapp4', sessionCheck, webapp4);
+app.use('/dedicated/comp2', sessionCheck, require('./routes/problem/comp2'));
+app.use('/dedicated/webapp4', sessionCheck, require('./routes/problem/webapp4'));
 
 app.use('/pgconsole', pgconsole);
 

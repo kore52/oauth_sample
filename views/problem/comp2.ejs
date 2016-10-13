@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <%- partial('part_header', { title: "正規表現 1" }) %>
+
+<body>
+    <div class="container">
+        <div style="height:100px;"><h1>正規表現</h1></div>
+        <div class="center-block">
+            <p>各正規表現を満たす文字列の例を1つ入力すること（何度でも入力可）。</p>
+            <div id="problemContainer"></div>
+            <div id="clear"></div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+(function() {
+function checkAnswer(re, input, check) {
+    try {
+        var reSrc = $(re).html()
+        var inputText = $(input).val()
+        var regex = new RegExp(reSrc)
+        if (inputText.match(regex)) {
+            $(check).html('<i class="fa fa-check fa-lg text-success" aria-hidden="true"></i>')
+        } else {
+            $(check).html('<i class="fa fa-times fa-lg text-danger" aria-hidden="true"></i>')
+        }
+    } catch(e) {
+        console.log(e)
+    }
+}
+
+function registerCheckEvent(n) {
+    $('#form'+n).submit(function(e) {
+        checkAnswer('#problem'+n, '#answer'+n, '#result'+n)
+        checkClear()
+        return false
+    });
+}
+
+function createProblems() {
+    var linedoc = (function() {/*
+      <form id="form${num}">
+        <div class="form-group row">
+          <label class="sr-only" id="problem${num}" for="answer${num}">${regex_cmp}</label>
+          <div class="col-md-12 col-xs-12"><pre>${regex_display}</pre></div>
+          <div class="col-md-8 col-xs-7"><input class="form-control" id="answer${num}" type="text"></div>
+          <div class="col-md-2 col-xs-2"><button id="check${num}" class="btn btn-default">Check</button></div>
+          <div class="col-md-2 col-xs-2 result" id="result${num}"></div>
+        </div>
+      </form>
+    */}).toString().match(/(?:\/\*(?:[\s\S]*?)\*\/)/).pop().replace(/^\/\*/, "").replace(/\*\/$/, "");
+
+    var multidoc = (function() {/*
+      <form id="form${num}">
+        <div class="form-group row">
+          <label class="sr-only" id="problem${num}" for="answer${num}">${regex_cmp}</label>
+          <div class="col-md-12 col-xs-12"><pre>${regex_display}</pre></div>
+          <div class="col-md-8 col-xs-7"><textarea class="form-control" id="answer${num}" rows="3"></textarea></div>
+          <div class="col-md-2 col-xs-2"><button id="check${num}" class="btn btn-default">Check</button></div>
+          <div class="col-md-2 col-xs-2 result" id="result${num}"></div>
+        </div>
+      </form>
+    */}).toString().match(/(?:\/\*(?:[\s\S]*?)\*\/)/).pop().replace(/^\/\*/, "").replace(/\*\/$/, "");
+    
+    var sl = 1, ml = 2 // sl: single line, ml: multiple line
+    var crlf = getLineFeedCode()
+    var crlfDisplay = (function() { if (getOS() == 'Windows') { return '\\r\\n' } else if (getOS() == 'Linux') { return '\\n' } else { return '\\r' } })
+    var problems = [
+        [sl, "^aaa.bbb\\.ccc$", "^aaa.bbb\\.ccc$"],
+        [sl, "^aa+bb*cc?$", "^aa+bb*cc?$"],
+        [sl, "^a(aaa|bbb)bc(cc+|dd*)e$", "^a(aaa|bbb)bc(cc+|dd*)e$"],
+        [sl, "^Go{5}gleYaho{2,4}$", "^Go{5}gleYaho{2,4}$"],
+        [sl, "^[^abc]{5}[abc]{5}$", "^[^abc]{5}[abc]{5}$"],
+        [sl, "^[a-m][n-z][A-C][Q-Z]-[0-9][0-5][3-8]$", "^[a-m][n-z][A-C][Q-Z]-[0-9][0-5][3-8]$"],
+        [sl, "^\\x48\\x65\\x6c\\x6c\\x6f$", "^\\x48\\x65\\x6c\\x6c\\x6f$"],
+        [sl, "^\\u5fb3\\u5ddd\\u5bb6\\u5eb7$", "^\\u5fb3\\u5ddd\\u5bb6\\u5eb7$"],
+        [sl, "^\\d{1,4}\\.\\d{1,4}\\.\\d{1,4}\\.\\d{1,4}$", "^\\d{1,4}\\.\\d{1,4}\\.\\d{1,4}\\.\\d{1,4}$"],
+        [ml, "^line1" + crlf + "line2" + crlf + "line3$", "^line1" + crlfDisplay() + "line2" + crlfDisplay() + "line3$"]
+    ]
+    for ( var i = 0; i < problems.length; i++ ) {
+        var params = {
+            num: i,
+            regex_cmp: problems[i][1],
+            regex_display: problems[i][2].replace(/\\/g, '\\')
+        }
+        var doc = jQuery.tmpl((problems[i][0]==sl) ? linedoc : multidoc, params)
+        $('#problemContainer').append(doc)
+        registerCheckEvent(i)
+    }
+}
+
+function enc(str) {
+    var ret_str="";
+    var code_A = 'A'.charCodeAt(0);
+    var code_a = 'a'.charCodeAt(0);
+    var code_N = 'N'.charCodeAt(0);
+    var code_n = 'n'.charCodeAt(0);
+    var code_Z = 'Z'.charCodeAt(0);
+    var code_z = 'z'.charCodeAt(0);
+
+    for(var i=0; i<str.length; i++){
+        var code = str.charCodeAt(i);
+        if((code_A <= code && code < code_N) || (code_a <= code && code < code_n)){
+            code = code + 13;
+        }else if((code_N <= code && code <= code_Z) || (code_n <= code && code <= code_z)){
+            code = code - 13;
+        }
+        ret_str += String.fromCharCode(code);
+    }
+    return ret_str;
+}
+
+function checkClear() {
+    var c = true
+    $('.result').each(function(index){
+        var li = $(this).children('i')
+        if (li.length == 0 || !li.hasClass('text-success'))
+            c = false
+    })
+    if (c) {
+        $('#clear').empty()
+        $('#clear').append('<div class="col-xs-12 bg-success text-success" style="height:100px"><p class="text-center" style="line-height: 100px;">'+enc('PBATENGF! Synt vf: LBH_UNIR_N_ZNFGREL_BS_ERTHYNE_RKCERFFVBA')+'</p></div>')
+    }
+}
+
+function getOS() {
+    var ua = navigator.userAgent;
+    if (ua.match(/Windows/)) {
+        return 'Windows'
+    }
+    else if (ua.match(/Linux/)) {
+        return 'Linux'
+    }
+    else if (ua.match(/Mac|PPC/)) {
+        if (ua.match(/Mac OS X/))
+            return 'Mac OS X'
+        return 'Mac OS'
+    }
+    return 'Unknown'
+}
+
+function getLineFeedCode() {
+    var os = getOS()
+    if (os == 'Windows') {  return '\r\n' }
+    if (os == 'Mac OS')     {  return '\r' }
+    return '\n'
+}
+
+createProblems()
+})()
+</script>
+</html>
