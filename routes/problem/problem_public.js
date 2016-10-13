@@ -11,12 +11,16 @@ router.get('/webapp3/api/add', function(req, res, next) {
 
         res.send(JSON.stringify({
             "apiversion": "1.0",
-            "status": "OK",
+            "status": "OK" + (int(Math.random() * 10)) >= 7) ? " (HINT: press F12 key)" : "",
             "result": a + b,
-            "flag": "PEEKING_YOUR_RESPONSE" }));
+            "flag": "YOU_CAN_PEEK_HTTP_RESPONSE" }));
 
     } catch(e) {
-        res.send(e);
+        res.send(JSON.stringify({
+            "apiversion": "1.0",
+            "status": "Fail",
+            "result": String(a + b) + " (HINT: press F12 key to see http response)",
+            "flag": "YOU_CAN_PEEK_HTTP_RESPONSE" }));
     }
 });
 
