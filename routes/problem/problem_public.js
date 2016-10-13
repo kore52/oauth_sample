@@ -16,7 +16,8 @@ router.get('/webapp3/api/add', function(req, res, next) {
             "flag": "YOU_CAN_PEEK_HTTP_RESPONSE" }));
 
     } catch(e) {
-        res.send(JSON.stringify({e}))
+        console.log(e)
+        res.send(JSON.stringify(e))
 /*        res.send(JSON.stringify({
             "apiversion": "1.0",
             "status": "Fail",
