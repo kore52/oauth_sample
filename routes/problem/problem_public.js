@@ -7,11 +7,14 @@ router.get('/webapp3/api/add', function(req, res, next) {
         var a = ("a" in req.query) ? parseInt(req.query.a) : 0;
         var b = ("b" in req.query) ? parseInt(req.query.b) : 0;
 
+        if (String(a) != req.query.a) throw "something"
+        if (String(b) != req.query.b) throw "something"
+        
         res.setHeader('content-type', 'application/json');
 
         res.send(JSON.stringify({
             "apiversion": "1.0",
-            "status": "OK" + (Math.floor(Math.random() * 10) >= 7) ? " (HINT: press F12 key)" : "",
+            "status": "OK",
             "result": a + b,
             "flag": "YOU_CAN_PEEK_HTTP_RESPONSE" }));
 
