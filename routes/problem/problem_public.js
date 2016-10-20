@@ -60,6 +60,8 @@ router.post('/webapp1', function(req, res, next) {
 router.post('/webapp2', function(req, res, next) {
 
     var pg = require('pg');
+    var pg_uri = process.env.POSTGRES_URI || ""
+    if (!pg_uri) throw new Error('There is no postgresql uri')
     var client = new pg.Client(process.env.POSTGRES_URI);
     client.connect(function(err) {
         if (err) {
