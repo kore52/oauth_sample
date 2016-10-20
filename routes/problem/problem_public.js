@@ -63,7 +63,7 @@ router.post('/webapp2', function(req, res, next) {
     var client = new pg.Client(POSTGRES_URI);
     client.connect(function(err) {
         if (err) {
-            return console.error('could not connect to pgsql', err);
+            return res.send('could not connect to pgsql', err);
         }
         
         var user = ("username" in req.body) ? req.body.username : "";
@@ -88,7 +88,7 @@ router.post('/webapp2', function(req, res, next) {
           || sql.match(/revoke/i)
           || sql.match(/grant/i)
         ){
-            res.send('Invalid query.');
+            return res.send('Invalid query.');
         }
         
         client.query(sql, function(err, result) {
