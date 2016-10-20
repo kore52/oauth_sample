@@ -60,7 +60,7 @@ router.post('/webapp1', function(req, res, next) {
 router.post('/webapp2', function(req, res, next) {
 
     var pg = require('pg');
-    var client = new pg.Client(POSTGRES_URI);
+    var client = new pg.Client(process.env.POSTGRES_URI);
     client.connect(function(err) {
         if (err) {
             return res.send('could not connect to pgsql', err);
