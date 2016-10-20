@@ -60,8 +60,7 @@ router.post('/webapp1', function(req, res, next) {
 router.post('/webapp2', function(req, res, next) {
 
     var pg = require('pg');
-    var connectUri = 'postgres://ezrzhrxmxxlxoy:ZcZCltCwhhw5_2_j-LvsFL3CtD@ec2-54-163-239-28.compute-1.amazonaws.com:5432/d31svkp8aldqv1';
-    var client = new pg.Client(connectUri);
+    var client = new pg.Client(POSTGRES_URI);
     client.connect(function(err) {
         if (err) {
             return console.error('could not connect to pgsql', err);
